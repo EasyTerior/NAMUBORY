@@ -61,7 +61,7 @@ body, main, section {
 								<h5 class="text-center fw-bold">예시 이미지</h5>
 							</div>
 							<img class="card-img-bottom"
-								src="resources/images/common/StyleRoom_image_1.jpg"
+								src="	resources/images/common/StyleRoom_image_1.jpg"
 								style="width: 500px; height: 300px;" alt="myImage">
 						</div>
 					</div>

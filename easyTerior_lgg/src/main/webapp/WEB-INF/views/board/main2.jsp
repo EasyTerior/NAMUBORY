@@ -61,7 +61,7 @@ body, main, section {
 							class="col-12 d-flex justify-content-between align-items-center mb-3">
 							<div></div>
 							<!-- 이 공백 div를 추가하여 글쓰기 +를 오른쪽으로 밀 수 있다. -->
-							<div class="h5 ms-auto">글쓰기 +</div>
+							<div class="h5 ms-auto"><a href="boardInsert.do" class="text-decoration-none text-dark"><span>글쓰기 +</span></a></div>
 						</div>
 					</div>
 
