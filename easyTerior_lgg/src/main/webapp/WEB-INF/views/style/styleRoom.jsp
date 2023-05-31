@@ -61,7 +61,7 @@ body, main, section {
 								<h5 class="text-center fw-bold">예시 이미지</h5>
 							</div>
 							<img class="card-img-bottom"
-								src="/resources/images/common/StyleRoom_image_1.jpg"
+								src="resources/images/common/StyleRoom_image_1.jpg"
 								style="width: 500px; height: 300px;" alt="myImage">
 						</div>
 					</div>
@@ -81,12 +81,12 @@ body, main, section {
 
 							<div class="row" style="margin-top: 20px">
 								<div class="col-sm-6">
-									<img src="/resources/images/common/StyleRoom_image_2.png"
+									<img src="resources/images/common/StyleRoom_image_2.png"
 										style="width: 200px; height: 200px;" alt="myImage">
 									<h4 style="text-align: center; font-weight: bold;">(x)</h4>
 								</div>
 								<div class="col-sm-6">
-									<img src="/resources/images/common/StyleRoom_image_3.png"
+									<img src="resources/images/common/StyleRoom_image_3.png"
 										style="width: 200px; height: 200px;" alt="myImage">
 									<h4 style="text-align: center; font-weight: bold;">(x)</h4>
 								</div>
