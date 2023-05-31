@@ -23,7 +23,7 @@ public class BoardController { // 서버 기능들
 	// 게시판 이동
 	@RequestMapping("/boardMain.do")
 	public String boardMain() {
-		return "board/main";
+		return "board/main2";
 	}
 	
 }
