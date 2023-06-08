@@ -1,5 +1,6 @@
 package kr.spring.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -11,13 +12,12 @@ import lombok.ToString;
 @NoArgsConstructor // 기본 생성자 없으면 에러 나므로 만들어줘야 함. 필수
 @AllArgsConstructor // 전체 argument를 받는 constructor 만들어줌 -> 필요에 의해
 @ToString // 값을 빠르게 확인하는 메서드 -> printInfo 같은 느낌
-public class Board {
+public class Comment {
+	private int commentID;
+	private String commentContent;
+	private String writer;
+	private LocalDateTime writeAt;
 	private int boardID;
-	private String title;
-	private String content;
-	private String boardImage;
-	private Date createdAt;
-	private int views;
 	private String memID;
-	
+
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.mapper.CommentMapper">
+
+  <insert id="addComment" parameterType="kr.spring.entity.Comment">
+    INSERT INTO Comment(commentContent, writeAt, memID, boardID)
+    VALUES (#{commentContent}, DEFAULT, #{memID}, #{boardID})
+  </insert>
+
+  <select id="selectBoardCommentByCode" resultType="kr.spring.entity.Comment">
+    SELECT * FROM Comment
+    WHERE boardID = #{boardID}
+  </select>
+
+</mapper>

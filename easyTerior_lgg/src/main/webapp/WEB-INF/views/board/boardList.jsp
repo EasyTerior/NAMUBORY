@@ -54,96 +54,62 @@ body, main, section {
 			<div class="container-fluid"
 				style="min-height: 100vh; margin-bottom: 200px;">
 
-
 				<div class="container">
 					<div class="row">
-						<div
-							class="col-12 d-flex justify-content-between align-items-center mb-3">
-							<div></div>
-							<!-- 이 공백 div를 추가하여 글쓰기 +를 오른쪽으로 밀 수 있다. -->
-							<div class="h5 ms-auto"><a href="boardInsert.do" class="text-decoration-none text-dark"><span>글쓰기 +</span></a></div>
-						</div>
+						<c:if test="${not empty sessionScope.memResult}">
+							<div
+								class="col-12 d-flex justify-content-between align-items-center mb-3">
+								<div></div>
+								<!-- 이 공백 div를 추가하여 글쓰기 +를 오른쪽으로 밀 수 있다. -->
+								<div class="h5 ms-auto">
+									<a href="boardForm.do" class="text-decoration-none text-dark">
+										<span>글쓰기 +</span>
+									</a>
+								</div>
+							</div>
+						</c:if>
 					</div>
 
+
+
+
 					<div class="row">
-						<div class="col-md-6">
-							<div class="card mb-3">
-								<img src="resources/images/common/boardMain_image1.png"
-									class="card-img-top" alt="...">
-								<div class="card-body">
-									<h5 class="card-title text-center fw-bold">침대 색깔 이렇게 변경하고 싶은데
-										괜찮나요?</h5>
-									<div class="card-text d-flex justify-content-center mt-3">
-										<button type="button"
-											class="btn btn-primary btn-lg col-auto me-2"
-											style="min-width: 40%;">
-											<span class="fs-5">좋아요!<br>75%
-											</span>
-										</button>
-										<button type="button"
-											class="btn btn-secondary btn-lg col-auto"
-											style="min-width: 40%;">
-											<span class="fs-5">별로에요<br>25%
-											</span>
+						<c:forEach var="model" items="${list}" varStatus="status">
+							<c:if test="${status.index % 2 == 0}">
+								<div class="row">
+							</c:if>
+
+							<div class="col-md-6">
+								<div class="card mb-3">
+									<img src="resources/images/common/styleRoom_Result_image_1.png"
+										class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title fw-bold">
+											<a href="boardContent.do/${model.boardID}"
+												class="text-decoration-none text-dark"> <c:out
+													value="${model.title}" />
+											</a>
+										</h5>
+										<p class="card-text">
+											<c:out value="${model.content}" />
+											<br> <a href="#">더보기</a>
+										</p>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card mb-3">
-								<img src="resources/images/common/boardMain_image2.png"
-									class="card-img-top" alt="...">
-								<div class="card-body">
-									<h5 class="card-title fw-bold">이사하면서 제 방 이렇게 꾸며봤어요!</h5>
-									<p class="card-text">
-										그동안 자취방을 여러 번 옮기면서 점차 제 생활패턴에 맞는 가구배치나 좋아하는 인테리어 취향, 방을 고르는 눈이
-										한 단계씩 업그레이드… <br> <a href="#">더보기</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<div class="card">
-								<img src="resources/images/common/boardMain_image3.png"
-									class="card-img-top" alt="...">
-								<div class="card-body">
-									<h5 class="card-title fw-bold">플랜테리어로 꾸민 2평 방</h5>
-									<p class="card-text">
-										제 취미는 식물키우기에요. 처음에는 이렇게 좋아하게 될 줄 몰랐는데... <br> <a href="#">더보기</a>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card">
-								<img src="resources/images/common/boardMain_image4.png"
-									class="card-img-top" alt="...">
-								<div class="card-body">
-									<h5 class="card-title fw-bold">이 의자 살까 말까?</h5>
-									<div class="card-text d-flex justify-content-center mt-3">
-										<button type="button"
-											class="btn btn-primary btn-lg col-auto me-2"
-											style="min-width: 40%;">
-											<span class="fs-5">좋아요!
-											</span>
-										</button>
-										<button type="button"
-											class="btn btn-secondary btn-lg col-auto"
-											style="min-width: 40%;">
-											<span class="fs-5">별로에요
-											</span>
-									</div>
-								</div>
-							</div>
-						</div>
+							<c:if test="${status.index % 2 == 1 || status.last}">
 					</div>
+					</c:if>
+					</c:forEach>
 				</div>
 
 
 
+
+
+
+			</div>
 			</div>
 		</section>
 		<jsp:include page="../common/footer.jsp"></jsp:include>

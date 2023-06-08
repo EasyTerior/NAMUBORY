@@ -245,5 +245,5 @@ public class MemberController {
 		}
 
 	}
-
+		Member mvo = new Member();
 }

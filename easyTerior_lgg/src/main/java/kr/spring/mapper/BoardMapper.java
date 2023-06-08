@@ -16,7 +16,7 @@ public interface BoardMapper {
 	public void boardInsert(Board board);
 	
 	// 게시글 상세 보기 기능
-	public Board boardContent(int idx);
+	public Board boardContent(int boardID);
 
 	// 게시글 삭제 기능
 	public void boardDelete(int idx);
@@ -28,4 +28,6 @@ public interface BoardMapper {
 	// public void boardCount(int idx);
 	@Update("UPDATE board SET count = count + 1 WHERE idx = #{idx}") // 여기에 SQL 해놨으므로 BoardMapper.xml 에서는 삭제. 중복되어 에러남.
 	public void boardCount(int idx);
+
+	
 }

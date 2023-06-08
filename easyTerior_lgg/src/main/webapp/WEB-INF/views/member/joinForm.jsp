@@ -106,7 +106,7 @@ rel="stylesheet" /><!-- icons -->
 					<div class="row mb-3">
 					    <label for="memID" class="col-sm-2 col-form-label">아이디</label>
 					    <div class="col-sm-7">
-					        <input type="text" placeholder="공백 없이 한글, 영어, 숫자로 20자 미만의 아이디만 가능합니다." pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]+" maxlength=20 class="form-control" id="memID" />
+					        <input type="text" placeholder="공백 없이 한글, 영어, 숫자로 20자 미만의 아이디만 가능합니다." pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]+" maxlength=20 class="form-control" id="memID" name="memID"/>
 					    </div>
 					    <div class="col-sm-3">
 					        <button type="button" onclick="registerCheck()" data-bs-toggle="modal" class="btn btn-sm btn-primary" >중복확인</button>
@@ -129,13 +129,13 @@ rel="stylesheet" /><!-- icons -->
 					<div class="row mb-3">
 					    <label for="memName" class="col-sm-2 col-form-label">이름</label>
 					    <div class="col-sm-10">
-					        <input type="text" class="form-control" id="memName" required />
+					        <input type="text" class="form-control" id="memName" name="memName" required />
 					    </div>
 					</div>
 					<div class="row mb-3">
 					    <label for="memNickname" class="col-sm-2 col-form-label">닉네임</label>
 					    <div class="col-sm-10">
-					        <input type="text" placeholder="공백 없이 한글, 영어, 숫자로 10자 미만의 닉네임만 가능합니다." pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]+" maxlength=10 class="form-control" id="memNickname" required />
+					        <input type="text" placeholder="공백 없이 한글, 영어, 숫자로 10자 미만의 닉네임만 가능합니다." pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]+" maxlength=10 class="form-control" id="memNickname" name="memNickname" required />
 					    </div>
 					</div>
 					<div class="row mb-3">
@@ -147,12 +147,12 @@ rel="stylesheet" /><!-- icons -->
 					<div class="row mb-3">
 					    <label for="memEmail" class="col-sm-2 col-form-label">이메일</label>
 					    <div class="col-sm-10">
-					        <input type="email" placeholder="email@email.com" pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$" class="form-control" id="memEmail" required />
+					        <input type="email" placeholder="email@email.com" pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$" class="form-control" id="memEmail" name="memEmail" required />
 					    </div>
 					</div>
 					<div class="row mb-3">
 					    <label for="memAddress" class="col-sm-2 col-form-label">주소</label>
-					    <input type="hidden" class="" id="memAddress" />
+					    <input type="hidden" class="" id="memAddress" name="memAddress" />
 					    <div class="col-md-4 input-grou position-relative">
 							<button type="button" class="btn btn-sm btn-info align-top" onclick="addressFullFill()">우편번호 찾기</button>
 					        	<input type="text" id="postcode" class="form-control"  placeholder="우편번호">

@@ -113,12 +113,16 @@ $("#addItemBtn").click(function() {
 					</div>
 				</div>
 
-				<form class="mt-5">
+				<form class="mt-5" action="boardInsert.do" method="post">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" /> <input type="hidden" name="memID"
+						value="${sessionScope.memResult.memID}">
+
 					<div class="row mb-4">
 						<label for="title"
 							class="col-form-label col-md-1 text-center fw-bold">제목</label>
 						<div class="col-md-11">
-							<input type="text" class="form-control" id="title">
+							<input type="text" class="form-control" name="title">
 						</div>
 					</div>
 					<hr>
@@ -127,7 +131,7 @@ $("#addItemBtn").click(function() {
 						<label for="image"
 							class="col-form-label col-md-1 text-center fw-bold">사진 추가</label>
 						<div class="col-md-11">
-							<input type="file" class="form-control" id="image">
+							<input type="file" class="form-control" name="boardImage">
 						</div>
 					</div>
 
@@ -135,7 +139,7 @@ $("#addItemBtn").click(function() {
 						<label for="content"
 							class="col-form-label col-md-1 text-center fw-bold">내용</label>
 						<div class="col-md-11">
-							<textarea class="form-control" id="content" rows="5"></textarea>
+							<textarea class="form-control" name="content" rows="5"></textarea>
 						</div>
 					</div>
 					<hr>
@@ -144,7 +148,7 @@ $("#addItemBtn").click(function() {
 						<label for="content"
 							class="col-form-label col-md-1 text-center fw-bold">투표여부</label>
 						<div class="col-md-11 d-flex align-items-center">
-							<input type="checkbox" id="vote_check">
+							<input type="checkbox" name="vote_check">
 						</div>
 					</div>
 
