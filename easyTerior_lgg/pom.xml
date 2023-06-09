@@ -82,7 +82,7 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 
 		<!-- @Inject -->
@@ -170,6 +170,12 @@
 			<version>2.9.8</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.9.8</version>
+		</dependency>
+
 		<!-- 파일 업로드를 하기 위한 COS API -->
 		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
 		<dependency>
@@ -202,6 +208,13 @@
 			<version>1.4</version>
 		</dependency>
 
+		<!-- commons -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
 		<!-- jsonArray 사용 -->
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
@@ -209,6 +222,7 @@
 			<artifactId>json</artifactId>
 			<version>20180130</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

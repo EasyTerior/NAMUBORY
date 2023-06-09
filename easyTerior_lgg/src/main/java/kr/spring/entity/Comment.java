@@ -17,7 +17,7 @@ public class Comment {
 	private String commentContent;
 	private String writer;
 	private LocalDateTime writeAt;
-	private int boardID;
 	private String memID;
+	private int boardID;
 
 }

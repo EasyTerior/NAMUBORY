@@ -10,8 +10,8 @@
 
 
 	<insert id="boardInsert" parameterType="kr.spring.entity.Board">
-		INSERT INTO Board(title, content, memID, createdAt)
-		VALUES(#{title}, #{content}, #{memID}, DEFAULT);
+		INSERT INTO Board(title, content, memID, createdAt,boardImage)
+		VALUES(#{title}, #{content}, #{memID}, DEFAULT, #{uniqueName});
 	</insert>
 
 
@@ -20,6 +20,8 @@
 		SELECT * FROM Board
 		WHERE boardID = #{boardID};
 	</select>
+	
+	
 	
 	<!-- <delete id="boardDelete" parameterType="int"> DELETE FROM board WHERE 
 		idx = #{idx} </delete> <update id="boardUpdate" parameterType="kr.spring.entity.Board"> 

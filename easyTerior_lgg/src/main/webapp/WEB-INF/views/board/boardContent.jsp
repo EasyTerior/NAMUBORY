@@ -29,6 +29,19 @@
 body, main, section {
 	position: relative;
 }
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.image-container img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -72,23 +85,20 @@ body, main, section {
 
 
 				<div class="d-flex justify-content-end align-items-center">
-					<a href="boardList.do"><button class="btn btn-primary">목록으로</button></a>
+					<a href="${contextPath }/boardList.do"><button class="btn btn-primary">목록으로</button></a>
 				</div>
 				<h3 class="fw-bold">${board.title}</h3>
 				<hr>
-				<br> <br> <br>
-				<div
-					style="display: flex; justify-content: center; align-items: center;">
-					<span>사진 위치</span>
+				<div class="image-container">
+				<img src="${pageContext.request.contextPath}/resources/upload/${board.boardImage}" alt="이미지">
+				<!-- eclipse property 설정해야지 자동으로 새로고침됨-->
 				</div>
-				<br> <br> <br> <br>
 				<!-- 추후 삭제 -->
-				<h5>${board.content }</h5>
+				<h5>${board.content}</h5>
 				<hr>
 
 				<jsp:include page="../board/comment.jsp"></jsp:include>
 				
-
 
 
 

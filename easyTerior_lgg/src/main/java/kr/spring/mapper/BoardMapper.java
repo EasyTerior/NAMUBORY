@@ -1,5 +1,6 @@
 package kr.spring.mapper;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -23,6 +24,9 @@ public interface BoardMapper {
 
 	// 게시글 업데이트 기능
 	public void boardUpdate(Board board);
+	
+	// 게시글 이미지 경로 입력
+	
 
 	// 게시글 조회수 +1 기능
 	// public void boardCount(int idx);

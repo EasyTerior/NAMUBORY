@@ -28,6 +28,11 @@
 body, main, section {
 	position: relative;
 }
+.card img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -81,8 +86,7 @@ body, main, section {
 
 							<div class="col-md-6">
 								<div class="card mb-3">
-									<img src="resources/images/common/styleRoom_Result_image_1.png"
-										class="card-img-top" alt="...">
+									<img src="${pageContext.request.contextPath}/resources/upload/${model.boardImage}" alt="이미지">
 									<div class="card-body">
 										<h5 class="card-title fw-bold">
 											<a href="boardContent.do/${model.boardID}"

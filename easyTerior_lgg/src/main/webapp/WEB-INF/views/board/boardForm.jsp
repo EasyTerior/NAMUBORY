@@ -40,18 +40,17 @@ $(document).ready(function() {
     }
 
     // 투표 항목 추가
-var itemCount = 2; // 초기 항목 수 설정
+    var itemCount = 2; // 초기 항목 수 설정
 
-$("#addItemBtn").click(function() {
-    itemCount++; // 항목 수 증가
-    var inputField = '<div class="offset-md-1 col-md-11 mb-2" style="display: block;">' +
-        '<input type="text" class="form-control vote-item" placeholder="' + (itemCount+1) + '. 항목을 입력하세요">' +
-        '</div>';
-    var newInputField = $(inputField).clone(); // 새로운 input 요소 생성
-    newInputField.find("input").attr("id", "vote-item-" + (itemCount+1)); // 증가된 id 적용 -> 이렇게 하면 input 태그 각각 id값이 달라짐
-    $("input[type='text']:last").parent().after(newInputField); // 마지막 input 요소 바로 뒤에 동적으로 입력 필드를 생성하여 쭉쭉 추가됨
-});
-
+    $("#addItemBtn").click(function() {
+        itemCount++; // 항목 수 증가
+        var inputField = '<div class="offset-md-1 col-md-11 mb-2" style="display: block;">' +
+            '<input type="text" class="form-control vote-item" placeholder="' + (itemCount+1) + '. 항목을 입력하세요">' +
+            '</div>';
+        var newInputField = $(inputField).clone(); // 새로운 input 요소 생성
+        newInputField.find("input").attr("id", "vote-item-" + (itemCount+1)); // 증가된 id 적용 -> 이렇게 하면 input 태그 각각 id값이 달라짐
+        $("input[type='text']:last").parent().after(newInputField); // 마지막 input 요소 바로 뒤에 동적으로 입력 필드를 생성하여 쭉쭉 추가됨
+    });
 
     // 페이지 로드 시 checkbox 상태에 따라 입력 필드와 버튼 초기 상태 설정
     if ($("#vote_check").is(":checked")) {
@@ -92,6 +91,20 @@ $("#addItemBtn").click(function() {
     disableVoteItems();
 });
 
+//이미지 업로드
+function readURL(input) {
+    var file = input.files[0];
+    console.log(file);
+    if (file != '') {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            console.log(e.target);
+            console.log(e.target.result);
+            $('#preview').attr('src', e.target.result);
+        }
+    }
+}   
 </script>
 <title>EasyTerior</title>
 </head>
@@ -112,12 +125,11 @@ $("#addItemBtn").click(function() {
 						</div>
 					</div>
 				</div>
-
-				<form class="mt-5" action="boardInsert.do" method="post">
+				<form action="upload_ok?${_csrf.parameterName}=${_csrf.token}"
+					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" /> <input type="hidden" name="memID"
 						value="${sessionScope.memResult.memID}">
-
 					<div class="row mb-4">
 						<label for="title"
 							class="col-form-label col-md-1 text-center fw-bold">제목</label>
@@ -126,18 +138,16 @@ $("#addItemBtn").click(function() {
 						</div>
 					</div>
 					<hr>
-
 					<div class="row mb-4">
 						<label for="image"
 							class="col-form-label col-md-1 text-center fw-bold">사진 추가</label>
 						<div class="col-md-11">
-							<input type="file" class="form-control" name="boardImage">
+							<input type="file" name="file">
 						</div>
 					</div>
-
 					<div class="row mb-4">
 						<label for="content"
-							class="col-form-label col-md-1 text-center fw-bold">내용</label>
+							class="col-form-label col-md-1 text-Scenter fw-bold">내용</label>
 						<div class="col-md-11">
 							<textarea class="form-control" name="content" rows="5"></textarea>
 						</div>
@@ -148,7 +158,7 @@ $("#addItemBtn").click(function() {
 						<label for="content"
 							class="col-form-label col-md-1 text-center fw-bold">투표여부</label>
 						<div class="col-md-11 d-flex align-items-center">
-							<input type="checkbox" name="vote_check">
+							<input type="checkbox" name="vote_check" id="vote_check">
 						</div>
 					</div>
 
@@ -168,24 +178,13 @@ $("#addItemBtn").click(function() {
 							<input type="text" class="form-control vote-item"
 								id="vote-item-3" placeholder="3. 항목을 입력하세요">
 						</div>
-
 						<div class="offset-md-1 col-md-11 mb-2">
 							<button id="addItemBtn" type="button" class="btn btn-primary">+항목추가</button>
 						</div>
 					</div>
-
-
-
-
-					<div class="text-center">
-						<button type="submit" class="btn btn-primary">글쓰기</button>
-					</div>
-
-
-				</form>
+					<button type="submit" class="btn btn-primary">글쓰기</button>
 			</div>
-
-
+			</form>
 		</section>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</main>

@@ -32,6 +32,8 @@ CREATE TABLE Board (
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     views INT(11) DEFAULT 0,
     memID VARCHAR(50) NOT NULL,
+    voteCount INT(11),
+    voteContent VARCHAR(2000),
     PRIMARY KEY (boardID)
 );
 
@@ -39,7 +41,7 @@ CREATE TABLE Board (
 
 select * from Board;
 DELETE FROM Board;
--- DROP TABLE board;
+DROP TABLE Board;
 
 
 
@@ -49,13 +51,13 @@ CREATE TABLE Comment (
     commentContent VARCHAR(2000) NOT NULL,
     writer VARCHAR(50) DEFAULT NULL,
     writeAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-    boardID INT(11) NOT NULL,
     memID VARCHAR(50) NOT NULL,
+    boardID INT(11) NOT NULL,
     PRIMARY KEY(commentID)
 );
 
-INSERT INTO Comment(commentContent,boardID,memID)
-VALUES('gg',1,'admin');
+INSERT INTO Comment(memID,boardID,commentContent)
+VALUES('admin',1,'gg');
 
 drop table Comment;
 select * from Comment;
