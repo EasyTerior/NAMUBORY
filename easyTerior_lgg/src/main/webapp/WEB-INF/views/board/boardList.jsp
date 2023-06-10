@@ -28,10 +28,11 @@
 body, main, section {
 	position: relative;
 }
+
 .card img {
-  max-width: 100%;
-  max-height: 200px;
-  object-fit: contain;
+	max-width: 100%;
+	max-height: 200px;
+	object-fit: contain;
 }
 </style>
 <script type="text/javascript">
@@ -86,7 +87,9 @@ body, main, section {
 
 							<div class="col-md-6">
 								<div class="card mb-3">
-									<img src="${pageContext.request.contextPath}/resources/upload/${model.boardImage}" alt="이미지">
+									<img
+										src="${pageContext.request.contextPath}/resources/upload/${model.boardImage}"
+										alt="이미지">
 									<div class="card-body">
 										<h5 class="card-title fw-bold">
 											<a href="boardContent.do/${model.boardID}"
@@ -107,6 +110,8 @@ body, main, section {
 					</c:if>
 					</c:forEach>
 				</div>
+
+			</div>
 
 
 

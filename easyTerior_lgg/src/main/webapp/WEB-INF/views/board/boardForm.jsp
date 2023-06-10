@@ -177,7 +177,7 @@ function readURL(input) {
 						<div class="offset-md-1 col-md-11 mb-2">
 							<input type="text" class="form-control vote-item"
 								id="vote-item-3" placeholder="3. 항목을 입력하세요">
-						</div>
+						</div> <!-- 여기서 name 추가할 때 값 똑같이 해도 됨 배열로 다 가져갈 수 있음 -->
 						<div class="offset-md-1 col-md-11 mb-2">
 							<button id="addItemBtn" type="button" class="btn btn-primary">+항목추가</button>
 						</div>
