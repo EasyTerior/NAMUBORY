@@ -43,6 +43,10 @@ select * from Board;
 DELETE FROM Board;
 DROP TABLE Board;
 
+SELECT * FROM Board
+		ORDER BY
+		createdAt DESC;
+
 
 
 -- 댓글 테이블 생성;

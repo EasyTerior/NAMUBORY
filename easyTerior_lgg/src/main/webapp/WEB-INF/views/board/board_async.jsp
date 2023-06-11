@@ -34,6 +34,20 @@ body, main, section {
 	max-height: 200px;
 	object-fit: contain;
 }
+
+.image-container {
+  width: 100%; /* Adjust the width of the container as needed */
+  height: 200px; /* Adjust the height of the container as needed */
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 300%;
+  object-fit: contain;
+}
+
+
 </style>
 <script type="text/javascript">
 
@@ -133,7 +147,6 @@ function readURL(input) {
 	//HTML이 다 로드되고 나서 작동하겠다 안에있는 코드를
 	$(document).ready(function() {
 		loadList();
-		  $("#file1").on("change", goInsert2);
 	});
 
 	function loadList() {
@@ -154,7 +167,6 @@ function readURL(input) {
 		  var listHtml = "<div class='row'>";
 		  
 		  if (${not empty sessionScope.memResult}) {
-			  
 		    // Write button HTML
 		    listHtml += "<div class='col-md-12' style='margin-bottom: 10px;'>"; // Add margin-bottom to create space below the button
 		    listHtml += "<button onclick='goForm()' class='btn btn-sm btn-primary float-end'>Write</button>";
@@ -164,18 +176,26 @@ function readURL(input) {
 		  listHtml += "<div class='col-md-12'>"; // Start a new column for the post list
 		  
 		  var isRowOpen = false;
+		  var contextPath = "${contextPath}";
 
 		  for (var i = 0; i < data.length; i++) {
 		    var model = data[i];
+		    console.log(model);
 
 		    if (i % 2 === 0 && !isRowOpen) {
 		      listHtml += "<div class='row'>";
 		      isRowOpen = true;
 		    }
+		    
 
 		    listHtml += "<div class='col-md-6'>";
 		    listHtml += "<div class='card mb-3'>";
-		    listHtml += '<img src="#" alt="image">';
+		    listHtml += "<div class='image-container'>";
+		    //이미지 없을 때 예외처리
+		    if (model.boardImage !== null && model.boardImage !== '') {
+		        listHtml += '<img src="' + contextPath + '/resources/upload/' + model.boardImage + '" alt="image">';
+		      }
+		    listHtml += "</div>";
 		    listHtml += "<div class='card-body'>";
 		    listHtml += "<h5 class='card-title fw-bold'>";
 		    listHtml += "<a href='boardContent/" + model.boardID + "' class='text-decoration-none text-dark'>";
@@ -239,11 +259,11 @@ function readURL(input) {
 	}
 	
 	//이미지 업로드 시험 코드
-	function goInsert2(){
+ 	/* function goInsert2(){
 		
-		/* var fData = $("#frm2").serialize();   */
+		 var fData = $("#frm2").serialize();   
 		
-	var file = $("#form2 #file2")[0].files[0];
+	var file = $("#file2")[0].files[0];
     var title = $("#title").val();
     var content = $("#content").val();
 
@@ -253,29 +273,30 @@ function readURL(input) {
     formData.append("content", content);
 
 		
-		
-		$.ajax({
-			url : "board/new2",
-			type : "post",
-			beforeSend : function(xhr){
-			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
-			data : formData,
- 			processData: false,
-		    contentType: false,
-		    enctype:"multipart/form-data",
-			success :  function() {
-                loadList();
-                resetForm(); 
-            },
-			error : function() {
-				console.log("error1");
-			}
-		});
+	console.log(file);
+	console.log(title);
+	console.log(content);
+	console.log(formData);
+	
+	$.ajax({
+		url : "board/new2",
+		type : "post",
+		beforeSend : function(xhr){
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		},
+		data : formData,
+		processData: false,
+	    contentType: false,
+	    cache: false,
+		success :  function() {
+			console.log("success");
+        },
+		error : function() {
+			console.log("error1");
+		}
+	});
 
-		$("#fclear").trigger("click");
-
-	}
+	}  */
 	
 	
 	function goForm() {
@@ -301,38 +322,8 @@ function readURL(input) {
 
 		<h1 class="text-center mb-3 fw-bold" style="margin-top: 30px;">커뮤니티</h1>
 		<!-- 실질 컨텐츠 위치 -->
-		<div class="container mx-5">
-			<form id="form2" name="form2" method="post"
-				enctype="multipart/form-data">
-				<input type="file" id="file2" name="file2"> <input
-					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<input type="hidden" name="memID"
-					value="${sessionScope.memResult.memID}">
-				<div class="col-12 mx-auto mt-3 mb-3 p-2"
-					style="background-color: lightgray;">
-					<div class="d-flex justify-content-center">
-						<h5 class="text-dark">글쓰기</h5>
-					</div>
-				</div>
-				<div class="row mb-4">
-					<label for="title"
-						class="col-form-label col-md-1 text-center fw-bold">제목</label>
-					<div class="col-md-11">
-						<input type="text" class="form-control" id="title" name="title">
-					</div>
-				</div>
-				<div class="row mb-4">
-					<label for="content"
-						class="col-form-label col-md-1 text-Scenter fw-bold">내용</label>
-					<div class="col-md-11">
-						<textarea class="form-control" id="content" name="content"
-							rows="5"></textarea>
-					</div>
-				</div>
-				<button onclick="goInsert2()" type="button"
-					class="btn btn-sm btn-success">등록하기</button>
-			</form>
-			<div class="panel-body" id="view"></div>
+
+		<div class="panel-body" id="view"></div>
 
 		</div>
 
@@ -340,7 +331,8 @@ function readURL(input) {
 		<!-- 글쓰기 폼 -->
 		<div class="panel-body" id="wform" style="display: none;">
 			<div class="container">
-				<form id="frm" method="post" enctype="multipart/form-data">
+				<form action="board/new2?${_csrf.parameterName}=${_csrf.token}"
+					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" /> <input type="hidden" name="memID"
 						value="${sessionScope.memResult.memID}">
@@ -354,7 +346,7 @@ function readURL(input) {
 						<label for="title"
 							class="col-form-label col-md-1 text-center fw-bold">제목</label>
 						<div class="col-md-11">
-							<input type="text" class="form-control" id="title" name="title">
+							<input type="text" class="form-control" id="title" name="title" required="required">
 						</div>
 					</div>
 					<hr>
@@ -370,7 +362,7 @@ function readURL(input) {
 							class="col-form-label col-md-1 text-Scenter fw-bold">내용</label>
 						<div class="col-md-11">
 							<textarea class="form-control" id="content" name="content"
-								rows="5"></textarea>
+								rows="5" required="required"></textarea>
 						</div>
 					</div>
 					<hr>
@@ -404,8 +396,7 @@ function readURL(input) {
 							<button id="addItemBtn" type="button" class="btn btn-primary">+항목추가</button>
 						</div>
 					</div>
-					<button onclick="goInsert()" type="button"
-						class="btn btn-sm btn-success">글쓰기</button>
+					<button type="submit" class="btn btn-sm btn-success">등록하기</button>
 			</div>
 			</form>
 

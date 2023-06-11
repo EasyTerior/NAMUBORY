@@ -29,6 +29,21 @@
 <script type="text/javascript">
 	
 </script>
+<style>
+.image-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.image-container img {
+	max-width: 80%;
+	max-height: 80%;
+	object-fit: contain;
+}
+</style>
 </head>
 <body>
 	<main class="main">
@@ -63,10 +78,14 @@
 				</div>
 				<h3 class="fw-bold">${board.title}</h3>
 				<hr>
-				<div class="image-container">
-					<img src="" alt="이미지">
-					<!-- eclipse property 설정해야지 자동으로 새로고침됨-->
-				</div>
+				<!-- 이미지 없을 때 예외처리 -->
+				<c:if test="${not empty board.boardImage}">
+					<div class="image-container">
+						<img
+							src="${pageContext.request.contextPath}/resources/upload/${board.boardImage}"
+							alt="이미지">
+					</div>
+				</c:if>
 				<!-- 추후 삭제 -->
 				<h5>${board.content}</h5>
 				<hr>
