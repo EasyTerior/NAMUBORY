@@ -169,7 +169,7 @@ function readURL(input) {
 		  if (${not empty sessionScope.memResult}) {
 		    // Write button HTML
 		    listHtml += "<div class='col-md-12' style='margin-bottom: 10px;'>"; // Add margin-bottom to create space below the button
-		    listHtml += "<button onclick='goForm()' class='btn btn-sm btn-primary float-end'>Write</button>";
+		    listHtml += "<button onclick='goForm()' class='btn btn-sm btn-primary float-end'>글쓰기</button>";
 		    listHtml += "</div>";
 		  }
 
