@@ -32,8 +32,10 @@ CREATE TABLE Board (
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     views INT(11) DEFAULT 0,
     memID VARCHAR(50) NOT NULL,
-    voteCount INT(11),
-    voteContent VARCHAR(2000),
+    voteContent1 VARCHAR(2000),
+    voteContent2 VARCHAR(2000),
+    count1 int default 0,
+    count2 int default 0,
     PRIMARY KEY (boardID)
 );
 

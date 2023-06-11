@@ -30,8 +30,15 @@ public interface BoardMapper {
 
 	// 게시글 조회수 +1 기능
 	// public void boardCount(int idx);
-	@Update("UPDATE board SET count = count + 1 WHERE idx = #{idx}") // 여기에 SQL 해놨으므로 BoardMapper.xml 에서는 삭제. 중복되어 에러남.
-	public void boardCount(int idx);
-
+	/*
+	 * @Update("UPDATE board SET count = count + 1 WHERE idx = #{idx}") // 여기에 SQL
+	 * 해놨으므로 BoardMapper.xml 에서는 삭제. 중복되어 에러남. public void boardCount(int idx);
+	 */
+	@Update("update board set count1 = count1 + 1 where boardID = #{boardID}") 
+	public void buttonCount1(int boardID);
+	
+	@Update("update board set count2 = count2 + 1 where boardID = #{boardID}") 
+	public void buttonCount2(int boardID);
+	
 	
 }

@@ -74,12 +74,12 @@ $(document).ready(function() {
     }
 
     // 투표 항목 추가
-    var itemCount = 2; // 초기 항목 수 설정
+    var itemCount = 1; // 초기 항목 수 설정
 
     $("#addItemBtn").click(function() {
         itemCount++; // 항목 수 증가
         var inputField = '<div class="offset-md-1 col-md-11 mb-2" style="display: block;">' +
-            '<input type="text" class="form-control vote-item" placeholder="' + (itemCount+1) + '. 항목을 입력하세요">' +
+            '<input type="text" class="form-control vote-item" name="voteContent" placeholder="' + (itemCount+1) + '. 항목을 입력하세요">' +
             '</div>';
         var newInputField = $(inputField).clone(); // 새로운 input 요소 생성
         newInputField.find("input").attr("id", "vote-item-" + (itemCount+1)); // 증가된 id 적용 -> 이렇게 하면 input 태그 각각 id값이 달라짐
@@ -230,33 +230,7 @@ function readURL(input) {
     }
 
 	
-	//게시글 입력함수
-	function goInsert() {
-
-		var fData = new FormData();
-	    fData.append( "file1", $("#file1")[0].files[0] );
-	    
-		$.ajax({
-			url : "board/new",
-			type : "post",
-			beforeSend : function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
-			data : fData,
-			processData: false,
-		    contentType: false,
-			success :  function() {
-                loadList();
-                resetForm(); 
-            },
-			error : function() {
-				console.log("error1");
-			}
-		});
-
-		$("#fclear").trigger("click");
-
-	}
+	
 	
 	
 	
@@ -342,15 +316,11 @@ function readURL(input) {
 						</div>
 						<div class="offset-md-1 col-md-11 mb-2">
 							<input type="text" class="form-control vote-item"
-								id="vote-item-1" placeholder="1. 항목을 입력하세요">
+								id="vote-item-1" name="voteContent1" placeholder="1. 항목을 입력하세요">
 						</div>
 						<div class="offset-md-1 col-md-11 mb-2">
 							<input type="text" class="form-control vote-item"
-								id="vote-item-2" placeholder="2. 항목을 입력하세요">
-						</div>
-						<div class="offset-md-1 col-md-11 mb-2">
-							<input type="text" class="form-control vote-item"
-								id="vote-item-3" placeholder="3. 항목을 입력하세요">
+								id="vote-item-2" name="voteContent2" placeholder="2. 항목을 입력하세요">
 						</div>
 						<!-- 여기서 name 추가할 때 값 똑같이 해도 됨 배열로 다 가져갈 수 있음 -->
 						<div class="offset-md-1 col-md-11 mb-2">

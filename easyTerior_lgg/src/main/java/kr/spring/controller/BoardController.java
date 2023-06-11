@@ -51,43 +51,57 @@ public class BoardController { // 서버 기능들
 
 	// 게시판 업로드
 	@PostMapping("board/new2")
-	public String boardInsert2(@RequestParam(value = "file", required = false) MultipartFile file, Board board, HttpServletRequest request) { // RestController
+	public String boardInsert2(@RequestParam(value = "file", required = false) MultipartFile file,
+			@RequestParam(value = "vote_check", required = false) boolean voteCheck,
+			@RequestParam(value = "voteContent1", required = false) String voteContent1,
+			@RequestParam(value = "voteContent2", required = false) String voteContent2, Board board,
+			HttpServletRequest request) { // RestController
 
-		
 		if (file != null && !file.isEmpty()) {
-		String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
-		long size = file.getSize(); // 파일 사이즈
+			String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
+			long size = file.getSize(); // 파일 사이즈
 
-		System.out.println("파일명 : " + fileRealName);
-		System.out.println("용량크기(byte) : " + size);
-		
-		// 서버에 저장할 파일이름 fileextension으로 .jsp이런식의 확장자 명을 구함
-		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
-		// 이고관PC 로컬 주소 - 수정해야합니다.
-		String uploadFolder = "D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources\\upload";
+			System.out.println("파일명 : " + fileRealName);
+			System.out.println("용량크기(byte) : " + size);
 
-		
-		UUID uuid = UUID.randomUUID();
-		System.out.println(uuid.toString());
-		String[] uuids = uuid.toString().split("-");
+			// 서버에 저장할 파일이름 fileextension으로 .jsp이런식의 확장자 명을 구함
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			// 이고관PC 로컬 주소 - 수정해야합니다.
+			String uploadFolder = "D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources\\upload";
 
-		String uniqueName = uuids[0];
-		System.out.println("생성된 고유문자열 : " + uniqueName);
-		System.out.println("확장자명 : " + fileExtension);
-		
-		String fileName = uniqueName + fileExtension; //확장자까지 그냥 하나의 변수로 묶음
-		
-		File saveFile = new File(uploadFolder + "\\" + uniqueName + fileExtension); // 적용 후
-		try {	
-			file.transferTo(saveFile);
-			board.setUniqueName(fileName);
-			 // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			UUID uuid = UUID.randomUUID();
+			System.out.println(uuid.toString());
+			String[] uuids = uuid.toString().split("-");
+
+			String uniqueName = uuids[0];
+			System.out.println("생성된 고유문자열 : " + uniqueName);
+			System.out.println("확장자명 : " + fileExtension);
+
+			String fileName = uniqueName + fileExtension; // 확장자까지 그냥 하나의 변수로 묶음
+
+			File saveFile = new File(uploadFolder + "\\" + uniqueName + fileExtension); // 적용 후
+			try {
+				file.transferTo(saveFile);
+				board.setUniqueName(fileName);
+				// 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
+		///////////////////////////////////////////////
+		if (voteContent1 != null) {
+				System.out.println(voteContent1);
+				board.setVoteContent1(voteContent1);
+			
 		}
+		if (voteContent2 != null) {
+			System.out.println(voteContent2);
+			board.setVoteContent2(voteContent2);
+	}
+
 		boardMapper.boardInsert(board);
 		return "redirect:/boardList.do";
 

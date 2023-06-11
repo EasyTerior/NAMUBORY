@@ -29,6 +29,58 @@
 <script type="text/javascript">
 	
 </script>
+<script>
+$(document).ready(function() {
+	
+});
+
+//토큰 이름과 값 설정
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+
+
+ function incrementCount1() {
+	 
+	 var boardID = $("input[name='boardID']").val();
+	 
+	$.ajax({
+		type : "put",
+		url : '${contextPath}/board/count1',
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		},
+		data : boardID,
+		success : function(response) {
+
+			console.log('Count incremented for ' );
+		},
+		error : function(error) {
+
+			console.error('Error occurred while incrementing count for '
+					);
+		}
+	});
+}  
+ 
+ function incrementCount2() {
+		$.ajax({
+			type : "put",
+			url : '${contextPath}/board/count2',
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			success : function(response) {
+
+				console.log('Count incremented for ' );
+			},
+			error : function(error) {
+
+				console.error('Error occurred while incrementing count for '
+						);
+			}
+		});
+	} 
+</script>
 <style>
 .image-container {
 	display: flex;
@@ -39,9 +91,19 @@
 }
 
 .image-container img {
-	max-width: 80%;
-	max-height: 80%;
+	max-width: 60%;
+	max-height: 60%;
 	object-fit: contain;
+}
+
+.btn-resize {
+	width: 200px;
+	height: 80px;
+	margin-right: 20px;
+}
+
+.btn-text-resize {
+	font-size: 24px;
 }
 </style>
 </head>
@@ -54,7 +116,7 @@
 			<h1 class="text-center mb-3 fw-bold" style="margin-top: 30px;">글
 				상세</h1>
 			<!-- 실질 컨텐츠 위치 -->
-
+		<input type="hidden" name="boardID" value="${board.boardID }">
 			<div class="container px-5">
 				<br>
 				<div class="row">
@@ -86,23 +148,28 @@
 							alt="이미지">
 					</div>
 				</c:if>
-				<!-- 추후 삭제 -->
 				<h5>${board.content}</h5>
+				
+
+				<!-- 투표 항목 없으면 출력 안함 -->
+				<c:if
+					test="${not empty board.voteContent1 and not empty board.voteContent2}">
+					 <div class="d-flex justify-content-center align-items-center mt-5">
+						<button class="btn btn-primary mx-4  btn-resize border-0"
+							style="background-color: lightblue;" id="button1"
+							onclick="incrementCount1()">
+							<span class="btn-text-resize">${board.voteContent1}</span>
+						</button>
+						<button class="btn btn-secondary mx-4  btn-resize border-0"
+							style="background-color: lightgray;" id="button2"
+							onclick="incrementCount2()">
+							<span class="btn-text-resize">${board.voteContent2}</span>
+						</button>
+					</div> 
+				</c:if>
 				<hr>
-
 				<jsp:include page="../board/comment_async.jsp"></jsp:include>
-
-
-
-
-
 			</div>
-
-
-
-
-
-
 		</section>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</main>

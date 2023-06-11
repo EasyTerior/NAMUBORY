@@ -51,15 +51,14 @@ public class BoardRestController {
 		List<Board> list = boardMapper.boardList();
 		return list; // JSON Object → JSON Array로 return
 	}
-	
+
 	// 댓글 리스트 보기
 	@GetMapping("/allComment")
-	public List<Comment> commentList(){
+	public List<Comment> commentList() {
 		List<Comment> list = commentMapper.commentList();
 		return list;
 	}
-	
-	
+
 	// 게시글 삭제 기능 : (비동기) 요청 URL - /boardDelete.do
 	// @GetMapping("/boardDelete.do") // type을 GET 에서 DELETE로 바꿨으니 맞춰야 함.
 	@DeleteMapping("/{idx}")
@@ -80,22 +79,32 @@ public class BoardRestController {
 	// 게시글 조회수 올리는 기능 : (비동기) 요청 URL - /boardCount.do
 	// @GetMapping("/boardCount.do") // RestController 에서 @ResonseBody 삭제
 	// public void boardCount(@RequestParam("idx") int idx) {
-	@PutMapping("/count/{idx}")
-	public void boardCount(@PathVariable("idx") int idx) {
-		boardMapper.boardCount(idx);
-	}
-	
+	/*
+	 * @PutMapping("/count/{idx}") public void boardCount(@PathVariable("idx") int
+	 * idx) { boardMapper.boardCount(idx); }
+	 */
+
 	// 댓글 DB 등록
 	@PostMapping("/comment")
 	public String addComment(Comment comment) {
-		
-		try{
-            commentMapper.comment(comment);
-            
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+
+		try {
+			commentMapper.comment(comment);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "success";
+	}
+
+	@PutMapping("/count1")
+	public void buttonCount1(int boardID) {
+		boardMapper.buttonCount1(boardID);
+	}
+
+	@PutMapping("/count2")
+	public void buttonCount2(int boardID) {
+		boardMapper.buttonCount2(boardID);
 	}
 
 }

@@ -20,8 +20,9 @@ public class Board {
 	private Date createdAt;
 	private int views;
 	private String memID;
-	private int voteCount;    // 투표 기능으로 인해 아래 두개 추가
-	private String voteContent;
+	private int voteCount;    // 투표 기능으로 인해 아래 세개 추가
+	private String voteContent1;
+	private String voteContent2;
 	
 }
 
