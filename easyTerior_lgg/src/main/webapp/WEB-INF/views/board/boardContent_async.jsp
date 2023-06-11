@@ -90,7 +90,7 @@
 				<h5>${board.content}</h5>
 				<hr>
 
-				<jsp:include page="../board/comment.jsp"></jsp:include>
+				<jsp:include page="../board/comment_async.jsp"></jsp:include>
 
 
 

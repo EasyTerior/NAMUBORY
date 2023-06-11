@@ -51,7 +51,7 @@ position: relative;
 			        		<span class="mt-3 mb-3 d-block">당신의 방이 어떤 스타일인지 궁금하지 않으신가요?<br/>방 사진을 업로드하면 확인할 수 있어요!<br/>취향에 맞는 인테리어 상품 추천까지 해드려요.</span>
 			        		<a href="${ contextPath }/styleRoom.do" class="d-inline-block m-auto btn btn-primary">분석하러 가기</a>
 			        	</div>
-			            <a href="#" class="d-block w-50 float-end"><img class="d-block w-100" src="${ contextPath }/resources/images/common/styleRoom.jpg" alt="styleRoom"></a>
+			            <a href="#" class="d-block w-50 float-end"><img class="d-block w-100" src="${ contextPath }/resources/upload/styleRoom.jpg" alt="styleRoom"></a>
 			        </div>
 			        <div class="carousel-item" data-bs-interval="3000">
 			        	<div class="d-block w-50 float-start mt-5 text-center">
@@ -59,7 +59,7 @@ position: relative;
 			        		<span class="mt-3 mb-3 d-block">사진 속 소품의 컬러를 변경하고 적용시켜보세요.<br/>분위기에 맞는 소품과 컬러까지 추천해드려요.</span>
 			        		<a href="${ contextPath }/colorChange.do" class="d-inline-block m-auto btn btn-primary">색깔 변경하기</a>
 			        	</div>
-			            <a href="#" class="d-block w-50 float-end"><img class="d-block w-100" src="${ contextPath }/resources/images/common/colorChange.jpg" alt="colorChange"></a>
+			            <a href="#" class="d-block w-50 float-end"><img class="d-block w-100" src="${ contextPath }/resources/upload/colorChange.jpg" alt="colorChange"></a>
 			        </div>
 			        <div class="carousel-item" data-bs-interval="3000">
 			        	<div class="d-block w-50 float-start mt-5 text-center">
@@ -67,7 +67,7 @@ position: relative;
 			        		<span class="mt-3 mb-3 d-block">당신이 변경한 스타일을 자랑해보세요.<br/>서로에게 추천받고 질문해봅시다.</span>
 			        		<a href="${ contextPath }/boardMain.do" class="d-inline-block m-auto btn btn-primary">커뮤니티 가기</a>
 			        	</div>
-			            <a href="#" class="d-block w-50 float-end"><img src="${ contextPath }/resources/images/common/community.jpg" class="d-block w-100" alt="community"></a>
+			            <a href="#" class="d-block w-50 float-end"><img src="${ contextPath }/resources/upload/community.jpg" class="d-block w-100" alt="community"></a>
 			        </div>
 			    </div>
 

@@ -2,12 +2,18 @@ package kr.spring.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +32,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.spring.entity.Board;
+import kr.spring.entity.Comment;
 import kr.spring.mapper.BoardMapper;
+import kr.spring.mapper.CommentMapper;
 
 @RequestMapping("/board")
 @RestController
@@ -34,6 +42,8 @@ public class BoardRestController {
 
 	@Autowired
 	private BoardMapper boardMapper;
+	@Autowired
+	private CommentMapper commentMapper;
 
 	// 게시글 전체 리스트 보기 (비동기) 요청 URL - /boardList.do
 	@GetMapping("/all")
@@ -41,52 +51,15 @@ public class BoardRestController {
 		List<Board> list = boardMapper.boardList();
 		return list; // JSON Object → JSON Array로 return
 	}
-
-	// 게시글 입력 기능 : (비동기) 요청 URL - /boardInsert.do
-	// @PostMapping("/boardInsert.do")
-	// -------동작 안됨------
-	/*
-	 * @PostMapping("/new") public void boardInsert(HttpServletRequest request,
-	 * RedirectAttributes rttr, HttpSession session, Board board) { //
-	 * RestController MultipartRequest multi = null;
-	 * 
-	 * int fileMaxSize = 100 * 1024 * 1024; // 파일 최대 크기 - 100MB String savePath =
-	 * request.getRealPath(
-	 * "D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources\\upload"); String
-	 * encType = "UTF-8"; // 중복제거 객체 DefaultFileRenamePolicy dfrp = new
-	 * DefaultFileRenamePolicy();
-	 * 
-	 * // 파일 업로드 객체 생성 // 매개변수 - 요청데이터, 저장경로, 인코딩, 파일명중복제거 try { multi = new
-	 * MultipartRequest(request, savePath, fileMaxSize, encType, dfrp); } catch
-	 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
-	 * 
-	 * String newImage = "";
-	 * 
-	 * // 사용자가 업로드한 파일 가져오기 File file = multi.getFile("file");
-	 * 
-	 * if (file != null) { // 사용자가 파일을 올렸을 때 String ext = file.getName(); // .뒤에 있는
-	 * 확장자만 가져오기 ext = ext.substring(ext.lastIndexOf(".") + 1); // .뒤에 확장자를 대문자로 다
-	 * 바꾸기 ext = ext.toUpperCase();
-	 * 
-	 * boolean isCheck = ext.equals("PNG") || ext.equals("JPG") ||
-	 * ext.equals("GIF");
-	 * 
-	 * if (!isCheck) { if (file.exists()) { file.delete(); } // 이미지 파일이 아닐때
-	 * 
-	 * rttr.addFlashAttribute("msgType", "실패 메세지"); rttr.addFlashAttribute("msg",
-	 * "실패~");
-	 * 
-	 * } else { // 이미지 파일 일 때 newImage = file.getName();
-	 * 
-	 * } }
-	 * 
-	 * board.setBoardImage(newImage); boardMapper.boardInsert(board);
-	 * 
-	 * }
-	 */
-
-	// 테스트 코드
-
+	
+	// 댓글 리스트 보기
+	@GetMapping("/allComment")
+	public List<Comment> commentList(){
+		List<Comment> list = commentMapper.commentList();
+		return list;
+	}
+	
+	
 	// 게시글 삭제 기능 : (비동기) 요청 URL - /boardDelete.do
 	// @GetMapping("/boardDelete.do") // type을 GET 에서 DELETE로 바꿨으니 맞춰야 함.
 	@DeleteMapping("/{idx}")
@@ -110,6 +83,19 @@ public class BoardRestController {
 	@PutMapping("/count/{idx}")
 	public void boardCount(@PathVariable("idx") int idx) {
 		boardMapper.boardCount(idx);
+	}
+	
+	// 댓글 DB 등록
+	@PostMapping("/comment")
+	public String addComment(Comment comment) {
+		
+		try{
+            commentMapper.comment(comment);
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+		return "success";
 	}
 
 }

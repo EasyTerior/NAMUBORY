@@ -3,15 +3,15 @@
 <mapper namespace="kr.spring.mapper.CommentMapper">
 
 
-	<select id="commentlist" resultType="kr.spring.entity.Comment">
-		SELECT commentContent FROM Comment
-		ORDER BY writeAt DESC;
+	<select id="commentList" resultType="kr.spring.entity.Comment">
+		SELECT * FROM Comment
+		ORDER BY writeAt DESC ;
 	</select>
 
 
 	<insert id="comment" parameterType="kr.spring.entity.Comment">
-		INSERT INTO Comment(commentContent)
-		VALUES (#{commentContent});
+		INSERT INTO Comment(memID,boardID,commentContent)
+		VALUES (#{memID},#{boardID},#{commentContent});
 	</insert>
 
 </mapper>

@@ -15,7 +15,6 @@ import lombok.ToString;
 public class Comment {
 	private int commentID;
 	private String commentContent;
-	private String writer;
 	private LocalDateTime writeAt;
 	private String memID;
 	private int boardID;

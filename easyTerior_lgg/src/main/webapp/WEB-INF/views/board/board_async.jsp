@@ -258,45 +258,6 @@ function readURL(input) {
 
 	}
 	
-	//이미지 업로드 시험 코드
- 	/* function goInsert2(){
-		
-		 var fData = $("#frm2").serialize();   
-		
-	var file = $("#file2")[0].files[0];
-    var title = $("#title").val();
-    var content = $("#content").val();
-
-    var formData = new FormData();
-    formData.append("file", file);
-    formData.append("title", title);
-    formData.append("content", content);
-
-		
-	console.log(file);
-	console.log(title);
-	console.log(content);
-	console.log(formData);
-	
-	$.ajax({
-		url : "board/new2",
-		type : "post",
-		beforeSend : function(xhr){
-		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-		},
-		data : formData,
-		processData: false,
-	    contentType: false,
-	    cache: false,
-		success :  function() {
-			console.log("success");
-        },
-		error : function() {
-			console.log("error1");
-		}
-	});
-
-	}  */
 	
 	
 	function goForm() {

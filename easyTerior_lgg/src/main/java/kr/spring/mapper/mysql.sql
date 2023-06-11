@@ -53,15 +53,13 @@ SELECT * FROM Board
 CREATE TABLE Comment (
     commentID INT(11) NOT NULL AUTO_INCREMENT,
     commentContent VARCHAR(2000) NOT NULL,
-    writer VARCHAR(50) DEFAULT NULL,
     writeAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     memID VARCHAR(50) NOT NULL,
     boardID INT(11) NOT NULL,
     PRIMARY KEY(commentID)
 );
 
-INSERT INTO Comment(memID,boardID,commentContent)
-VALUES('admin',1,'gg');
 
 drop table Comment;
 select * from Comment;
+DELETE FROM Comment;

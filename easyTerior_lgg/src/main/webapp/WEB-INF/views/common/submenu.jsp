@@ -11,7 +11,7 @@
 <div class="offcanvas offcanvas-start border-end border-dark border-5 bg-white m-auto" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="position:abosolute; top:0; left:100px;">
     <div class="offcanvas-header position-relative">
         <h1 class="offcanvas-title m-auto" id="offcanvasExampleLabel">
-        	<a class="nav-link active" aria-current="page" href="${ contextPath }/"><img style="width:100px;height:100px;" src="${ contextPath }/resources/images/common/ET_logo.png" class="rounded mx-auto d-block" alt="logo"></a>
+        	<a class="nav-link active" aria-current="page" href="${ contextPath }/"><img style="width:100px;height:100px;" src="${ contextPath }/resources/upload/ET_logo.png" class="rounded mx-auto d-block" alt="logo"></a>
         </h1>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" style="position: absolute;top: 15px;right: 15px;"></button>
     </div>

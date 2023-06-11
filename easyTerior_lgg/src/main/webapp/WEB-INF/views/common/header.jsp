@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item ms-5">
-          <a class="nav-link active" aria-current="page" href="${ contextPath }/"><img style="width:100px;height:100px;" src="${ contextPath }/resources/images/common/ET_logo.png" class="rounded mx-auto d-block" alt="logo"></a>
+          <a class="nav-link active" aria-current="page" href="${ contextPath }/"><img style="width:100px;height:100px;" src="${ contextPath }/resources/upload/ET_logo.png" class="rounded mx-auto d-block" alt="logo"></a>
           <!-- <a class="nav-link active" aria-current="page" href="/controller/">Home</a> -->
           <!-- /controller/ == context path 지만 직접적으로 쓰면 일일이 바꿔야 하므로 -->
         </li>
