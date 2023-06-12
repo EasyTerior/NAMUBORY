@@ -36,18 +36,22 @@ body, main, section {
 }
 
 .image-container {
-  width: 100%; /* Adjust the width of the container as needed */
-  height: 200px; /* Adjust the height of the container as needed */
-  overflow: hidden;
+	width: 100%; /* Adjust the width of the container as needed */
+	height: 200px; /* Adjust the height of the container as needed */
+	overflow: hidden;
 }
 
 .image-container img {
-  width: 100%;
-  height: 300%;
-  object-fit: contain;
+	width: 100%;
+	height: 300%;
+	object-fit: contain;
 }
 
-
+.btn-custom {
+	padding: 0.25rem 0.75rem;
+	background-color: lightblue;
+	border:none;
+}
 </style>
 <script type="text/javascript">
 
@@ -164,60 +168,63 @@ function readURL(input) {
 	}
 	
 	function makeView(data) {
-		  var listHtml = "<div class='row'>";
+		var listHtml = "<div class='container px-4'>"; // Add container class for left and right margins
+		listHtml += "<div class='row'>";
 		  
-		  if (${not empty sessionScope.memResult}) {
-		    // Write button HTML
-		    listHtml += "<div class='col-md-12' style='margin-bottom: 10px;'>"; // Add margin-bottom to create space below the button
-		    listHtml += "<button onclick='goForm()' class='btn btn-sm btn-primary float-end'>글쓰기</button>";
-		    listHtml += "</div>";
+		if (${not empty sessionScope.memResult}) {
+		  // Write button HTML
+		  listHtml += "<div class='col-md-12' style='margin-bottom: 10px;'>"; // Add margin-bottom to create space below the button
+		  listHtml += "<button onclick='goForm()' class='btn btn-sm btn-primary float-end'>글쓰기</button>";
+		  listHtml += "</div>";
+		}
+
+		listHtml += "<div class='col-md-12'>"; // Start a new column for the post list
+
+		var isRowOpen = false;
+		var contextPath = "${contextPath}";
+
+		for (var i = 0; i < data.length; i++) {
+		  var model = data[i];
+		  console.log(model);
+
+		  if (i % 2 === 0 && !isRowOpen) {
+		    listHtml += "<div class='row'>";
+		    isRowOpen = true;
 		  }
 
-		  listHtml += "<div class='col-md-12'>"; // Start a new column for the post list
-		  
-		  var isRowOpen = false;
-		  var contextPath = "${contextPath}";
-
-		  for (var i = 0; i < data.length; i++) {
-		    var model = data[i];
-		    console.log(model);
-
-		    if (i % 2 === 0 && !isRowOpen) {
-		      listHtml += "<div class='row'>";
-		      isRowOpen = true;
-		    }
-		    
-
-		    listHtml += "<div class='col-md-6'>";
-		    listHtml += "<div class='card mb-3'>";
-		    listHtml += "<div class='image-container'>";
-		    //이미지 없을 때 예외처리
-		    if (model.boardImage !== null && model.boardImage !== '') {
-		        listHtml += '<img src="' + contextPath + '/resources/upload/' + model.boardImage + '" alt="image">';
-		      }
-		    listHtml += "</div>";
-		    listHtml += "<div class='card-body'>";
-		    listHtml += "<h5 class='card-title fw-bold'>";
-		    listHtml += "<a href='boardContent/" + model.boardID + "' class='text-decoration-none text-dark'>";
-		    listHtml += model.title;
-		    listHtml += "</a>";
-		    listHtml += "</h5>";
-		    listHtml += "<p class='card-text'>";
-		    listHtml += model.content;
-		    listHtml += "<br> <a href='#'>더보기</a>";
-		    listHtml += "</p>";
-		    listHtml += "</div>";
-		    listHtml += "</div>";
-		    listHtml += "</div>";
-
-		    if ((i % 2 === 1 || i === data.length - 1) && isRowOpen) {
-		      listHtml += "</div>";
-		      isRowOpen = false;
-		    }
+		  listHtml += "<div class='col-md-6'>";
+		  listHtml += "<div class='card mb-3'>";
+		  listHtml += "<div class='image-container'>";
+		  //이미지 없을 때 예외처리
+		  if (model.boardImage !== null && model.boardImage !== '') {
+		    listHtml += '<img src="' + contextPath + '/resources/upload/' + model.boardImage + '" alt="image">';
 		  }
+		  listHtml += "</div>";
+		  listHtml += "<div class='card-body'>";
+		  listHtml += "<h5 class='card-title fw-bold'>";
+		  listHtml += "<a href='boardContent/" + model.boardID + "' class='text-decoration-none text-dark'>";
+		  listHtml += model.title;
+		  listHtml += "</a>";
+		  listHtml += "</h5>";
+		  listHtml += "<p class='card-text'>";
+		  listHtml += model.content;
+		  if (model.voteContent1 !== null && model.voteContent2 !== null) {
+		    listHtml += "<br> <a href='boardContent/" + model.boardID + "' class='btn btn-primary btn-sm text-decoration-none text-white btn-custom'>투표하기</a>";
+		  }
+		  listHtml += "</p>";
+		  listHtml += "</div>";
+		  listHtml += "</div>";
+		  listHtml += "</div>";
 
-		  listHtml += "</div>"; // Close the column div for the post list
-		  listHtml += "</div>"; // Close the row div
+		  if ((i % 2 === 1 || i === data.length - 1) && isRowOpen) {
+		    listHtml += "</div>";
+		    isRowOpen = false;
+		  }
+		}
+
+		listHtml += "</div>"; // Close the column div for the post list
+		listHtml += "</div>"; // Close the row div
+		listHtml += "</div>"; // Close the container div // Close the row div
 		  
 		  $("#view").html(listHtml);
 		  goList();
@@ -281,7 +288,8 @@ function readURL(input) {
 						<label for="title"
 							class="col-form-label col-md-1 text-center fw-bold">제목</label>
 						<div class="col-md-11">
-							<input type="text" class="form-control" id="title" name="title" required="required">
+							<input type="text" class="form-control" id="title" name="title"
+								required="required">
 						</div>
 					</div>
 					<hr>

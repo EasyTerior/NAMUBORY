@@ -63,7 +63,7 @@
 
 	//댓글 불러오기
 	function loadComment() {
-		
+
 		$.ajax({
 			url : "/controller/board/allComment", //경로는 맞음
 			type : "get",
@@ -78,34 +78,34 @@
 
 	//댓글 리스트 불러오기
 	function makeComment(data) {
-		
+
 		var html = "";
-        var boardID = $("#boardID").val();   
-		
-		if(data.length > 0){
-		for (var i = 0; i < data.length; i++) {
-			var model = data[i];
-			console.log(model);
-			
-			//boardID에 맞게 출력됨
-			if (model.boardID == boardID) {
-			 html += "<div>";
-             html += "<div><table class='table'><h6><strong>"+data[i].memID+"</strong></h6>";
-             html += data[i].commentContent + "<tr><td></td></tr>";
-             html += "</table></div>";
-             html += "</div>"; 
+		var boardID = $("#boardID").val();
+
+		if (data.length > 0) {
+			for (var i = 0; i < data.length; i++) {
+				var model = data[i];
+				console.log(model);
+
+				//boardID에 맞게 출력됨
+				if (model.boardID == boardID) {
+					html += "<div>";
+					html += "<div><table class='table'><h6><strong>"
+							+ data[i].memID + "</strong></h6>";
+					html += data[i].commentContent + "<tr><td></td></tr>";
+					html += "</table></div>";
+					html += "</div>";
+				}
 			}
-			}
-		}else {
-            html += "<div>";
-            html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-            html += "</table></div>";
-            html += "</div>";
-            
-        }
-        $("#commentList").html(html);
+		} else {
+			html += "<div>";
+			html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+			html += "</table></div>";
+			html += "</div>";
+
+		}
+		$("#commentList").html(html);
 	}
-	
 </script>
 </head>
 <body>
@@ -122,17 +122,20 @@
 
 					<table class="table">
 						<tr>
-							<td><textarea style="width: 1100px;margin-top: 0;" rows="3" cols="30"
-									id="commentContent" name="commentContent"
-									placeholder="댓글을 입력하세요"></textarea> <br>
-								<div>
+							<td><c:if test="${not empty sessionScope.memResult}">
+									<textarea style="width: 1100px; margin-top: 0;" rows="3"
+										cols="30" id="commentContent" name="commentContent"
+										placeholder="댓글을 입력하세요"></textarea>
+
+									<br>
+									<div>
 
 
-									<div class="text-center">
-										<a href='#' onClick="fn_comment()"
-											class="btn pull-right btn-success float-start">등록</a>
-									</div>
-
+										<div class="text-center">
+											<a href='#' onClick="fn_comment()"
+												class="btn pull-right btn-success float-start">등록</a>
+										</div>
+								</c:if>
 
 								</div></td>
 						</tr>

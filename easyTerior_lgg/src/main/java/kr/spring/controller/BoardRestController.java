@@ -99,7 +99,7 @@ public class BoardRestController {
 
 	@PutMapping("/count1")
 	public void buttonCount1(int boardID) {
-		boardMapper.buttonCount1(boardID);
+		 boardMapper.buttonCount1(boardID); 
 	}
 
 	@PutMapping("/count2")

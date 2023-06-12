@@ -49,13 +49,11 @@ var csrfTokenValue = "${_csrf.token}";
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 		},
-		data : boardID,
+		 data : boardID, 
 		success : function(response) {
-
 			console.log('Count incremented for ' );
 		},
 		error : function(error) {
-
 			console.error('Error occurred while incrementing count for '
 					);
 		}
