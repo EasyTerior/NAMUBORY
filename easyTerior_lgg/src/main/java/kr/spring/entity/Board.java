@@ -23,6 +23,8 @@ public class Board {
 	private int voteCount;    // 투표 기능으로 인해 아래 세개 추가
 	private String voteContent1;
 	private String voteContent2;
+	private int count1;
+	private int count2;
 	
 }
 

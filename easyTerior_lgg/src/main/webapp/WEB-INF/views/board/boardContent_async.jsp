@@ -30,54 +30,9 @@
 	
 </script>
 <script>
-$(document).ready(function() {
-	
-});
-
-//토큰 이름과 값 설정
-var csrfHeaderName = "${_csrf.headerName}";
-var csrfTokenValue = "${_csrf.token}";
-
-
- function incrementCount1() {
-	 
-	 var boardID = $("input[name='boardID']").val();
-	 
-	$.ajax({
-		type : "put",
-		url : '${contextPath}/board/count1',
-		beforeSend : function(xhr) {
-			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-		},
-		 data : boardID, 
-		success : function(response) {
-			console.log('Count incremented for ' );
-		},
-		error : function(error) {
-			console.error('Error occurred while incrementing count for '
-					);
-		}
-	});
-}  
- 
- function incrementCount2() {
-		$.ajax({
-			type : "put",
-			url : '${contextPath}/board/count2',
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
-			success : function(response) {
-
-				console.log('Count incremented for ' );
-			},
-			error : function(error) {
-
-				console.error('Error occurred while incrementing count for '
-						);
-			}
-		});
-	} 
+	//토큰 이름과 값 설정
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
 </script>
 <style>
 .image-container {
@@ -94,14 +49,22 @@ var csrfTokenValue = "${_csrf.token}";
 	object-fit: contain;
 }
 
-.btn-resize {
-	width: 200px;
-	height: 80px;
-	margin-right: 20px;
+.custom-btn {
+	padding: 12px 24px; /* Adjust the padding to change the button size */
+	margin: 10px;
+	margin-right: 50px;
+	font-size: 18px;
+	width: 200px; 
+	height: 75px;
+	border: none;
+	 color: white;
+}
+.custom-btn:nth-child(1) {
+  background-color: skyblue; /* Set background color for the first button */
 }
 
-.btn-text-resize {
-	font-size: 24px;
+.custom-btn:nth-child(2) {
+  background-color: lightgray; /* Set background color for the second button */
 }
 </style>
 </head>
@@ -114,7 +77,8 @@ var csrfTokenValue = "${_csrf.token}";
 			<h1 class="text-center mb-3 fw-bold" style="margin-top: 30px;">글
 				상세</h1>
 			<!-- 실질 컨텐츠 위치 -->
-		<input type="hidden" name="boardID" value="${board.boardID }">
+			<input type="hidden" name="boardID" value="${board.boardID }">
+			<input type="hidden" name="memID" value="${board.memID }">
 			<div class="container px-5">
 				<br>
 				<div class="row">
@@ -125,6 +89,7 @@ var csrfTokenValue = "${_csrf.token}";
 									value="${board.createdAt}" />
 							</p>
 							<p>작성자 : ${board.memID}</p>
+
 						</div>
 					</div>
 				</div>
@@ -147,25 +112,40 @@ var csrfTokenValue = "${_csrf.token}";
 					</div>
 				</c:if>
 				<h5>${board.content}</h5>
-				
+
 
 				<!-- 투표 항목 없으면 출력 안함 -->
 				<c:if
 					test="${not empty board.voteContent1 and not empty board.voteContent2}">
-					 <div class="d-flex justify-content-center align-items-center mt-5">
-						<button class="btn btn-primary mx-4  btn-resize border-0"
-							style="background-color: lightblue;" id="button1"
-							onclick="incrementCount1()">
-							<span class="btn-text-resize">${board.voteContent1}</span>
-						</button>
-						<button class="btn btn-secondary mx-4  btn-resize border-0"
-							style="background-color: lightgray;" id="button2"
-							onclick="incrementCount2()">
-							<span class="btn-text-resize">${board.voteContent2}</span>
-						</button>
-					</div> 
+					<div class="d-flex justify-content-center align-items-center mt-5">
+						<a href="/controller/buttonCount.do/${board.boardID}"
+							class="btn  custom-btn"> <span
+							class="btn-text-resize">${board.voteContent1}<br>${board.count1}(명)</span>
+						</a> <a href="/controller/buttonCount2.do/${board.boardID}"
+							class="btn  custom-btn"> <span
+							class="btn-text-resize">${board.voteContent2}<br>${board.count2}(명)</span>
+						</a>
+
+					</div>
+
+
 				</c:if>
+
+
+
+
 				<hr>
+				<!-- 수정,삭제 -->
+				<c:set var="sessionMemID" value="${sessionScope.memResult.memID}" />
+				<c:set var="boardID" value="${board.memID}" />
+
+				<c:if test="${sessionMemID eq boardID}">
+					<div class="d-flex justify-content-end">
+						<a href="/controller/boardDelete.do/${board.boardID}"
+							class="btn btn-danger">Delete</a>
+					</div>
+
+				</c:if>
 				<jsp:include page="../board/comment_async.jsp"></jsp:include>
 			</div>
 		</section>

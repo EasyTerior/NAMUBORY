@@ -14,6 +14,7 @@ import org.springframework.ui.Model; // public String boardList (Model model)
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping; // @RequestMapping("/boardList.do")
 import org.springframework.web.bind.annotation.RequestParam; // @RequestParam 을 통해서 Board 의 하나 혹은 해당에 없는 걸 받을 때 request로 받아서 매개변수 처리
@@ -69,6 +70,7 @@ public class BoardController { // 서버 기능들
 			// 이고관PC 로컬 주소 - 수정해야합니다.
 			String uploadFolder = "D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources\\upload";
 
+			// 파일 이름 중복 방지
 			UUID uuid = UUID.randomUUID();
 			System.out.println(uuid.toString());
 			String[] uuids = uuid.toString().split("-");
@@ -93,18 +95,42 @@ public class BoardController { // 서버 기능들
 
 		///////////////////////////////////////////////
 		if (voteContent1 != null) {
-				System.out.println(voteContent1);
-				board.setVoteContent1(voteContent1);
-			
+			System.out.println(voteContent1);
+			board.setVoteContent1(voteContent1);
+
 		}
 		if (voteContent2 != null) {
 			System.out.println(voteContent2);
 			board.setVoteContent2(voteContent2);
-	}
+		}
 
 		boardMapper.boardInsert(board);
 		return "redirect:/boardList.do";
 
+	}
+
+	// 게시글 삭제
+	@GetMapping("/boardDelete.do/{boardID}")
+	public String boardDelete(@PathVariable("boardID") int boardID, Board board) {
+
+		boardMapper.boardDelete(boardID);
+		return "redirect:/boardList.do";
+	}
+
+	// 버튼1 카운트
+	@GetMapping("/buttonCount.do/{boardID}")
+	public String buttonCount(@PathVariable("boardID") int boardID, Board board) {
+		boardMapper.buttonCount1(boardID);
+		return "redirect:/boardContent/{boardID}";
+
+	}
+
+	// 버튼1 카운트
+	@GetMapping("/buttonCount2.do/{boardID}")
+	public String buttonCount2(@PathVariable("boardID") int boardID, Board board) {
+
+		boardMapper.buttonCount2(boardID);
+		return "redirect:/boardContent/{boardID}";
 	}
 
 }

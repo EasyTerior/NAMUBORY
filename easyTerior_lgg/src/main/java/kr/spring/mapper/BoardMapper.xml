@@ -8,7 +8,7 @@
 		createdAt DESC;
 	</select>
 
-
+	<!-- 게시글 추가 -->
 	<insert id="boardInsert" parameterType="kr.spring.entity.Board">
 		INSERT INTO Board(title,
 		content, memID, createdAt,boardImage,voteContent1, voteContent2)
@@ -16,11 +16,17 @@
 		DEFAULT,#{uniqueName},#{voteContent1},#{voteContent2});
 	</insert>
 
-
+	<!-- 게시글 상세보기 -->
 	<select id="boardContent" parameterType="int"
 		resultType="kr.spring.entity.Board">
 		SELECT * FROM Board
 		WHERE boardID = #{boardID};
 	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="boardDelete" parameterType="int">
+		delete from Board
+	    where boardID = #{boardID};
+	</delete>
 
 </mapper>
