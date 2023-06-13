@@ -17,12 +17,10 @@ public class ServletConfig implements WebMvcConfigurer {
 	// MVC에서 구현되는 내용들 구현하기
 	
 	// resource 구현
-	// 새로고침 해야 게시판 사진이 뜨는 것 때문에 경로 수정-> 이미지 경로 수정
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// registry 라는 설정파일에 설정 등록
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-		registry.addResourceHandler("/resources/**").addResourceLocations("file:/D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources//upload");
 		// WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 
@@ -37,8 +35,8 @@ public class ServletConfig implements WebMvcConfigurer {
 		// WebMvcConfigurer.super.configureViewResolvers(registry);
 	}
 	
-	 // 파일 업로드 구성 추가
-    @Bean
+	//파일 업로드 구성 추가
+	@Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setMaxUploadSize(10485760); // 10MB

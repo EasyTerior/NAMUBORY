@@ -11,9 +11,8 @@
 	<!-- 게시글 추가 -->
 	<insert id="boardInsert" parameterType="kr.spring.entity.Board">
 		INSERT INTO Board(title,
-		content, memID, createdAt,boardImage,voteContent1, voteContent2)
-		VALUES(#{title}, #{content}, #{memID},
-		DEFAULT,#{uniqueName},#{voteContent1},#{voteContent2});
+		content, memID,boardImage,voteContent1, voteContent2)
+		VALUES(#{title}, #{content}, #{memID},#{uniqueName},#{voteContent1},#{voteContent2});
 	</insert>
 
 	<!-- 게시글 상세보기 -->

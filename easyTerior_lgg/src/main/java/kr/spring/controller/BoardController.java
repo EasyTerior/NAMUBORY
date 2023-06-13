@@ -2,6 +2,9 @@ package kr.spring.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -51,11 +54,10 @@ public class BoardController { // 서버 기능들
 	}
 
 	// 게시판 업로드
+
+	// 게시판 업로드
 	@PostMapping("board/new2")
-	public String boardInsert2(@RequestParam(value = "file", required = false) MultipartFile file,
-			@RequestParam(value = "vote_check", required = false) boolean voteCheck,
-			@RequestParam(value = "voteContent1", required = false) String voteContent1,
-			@RequestParam(value = "voteContent2", required = false) String voteContent2, Board board,
+	public String boardInsert2(@RequestParam(value = "file", required = false) MultipartFile file, Board board,
 			HttpServletRequest request) { // RestController
 
 		if (file != null && !file.isEmpty()) {
@@ -65,10 +67,10 @@ public class BoardController { // 서버 기능들
 			System.out.println("파일명 : " + fileRealName);
 			System.out.println("용량크기(byte) : " + size);
 
-			// 서버에 저장할 파일이름 fileextension으로 .jsp이런식의 확장자 명을 구함
+			// 서버에 저장할 파일이름 file extension으로 .asp이런식의 확장자 명을 구함
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			// 이고관PC 로컬 주소 - 수정해야합니다.
-			String uploadFolder = "D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources\\upload";
+			String uploadFolder = "D:\\total\\easyTerior_total\\src\\main\\webapp\\resources\\images\\upload";
 
 			// 파일 이름 중복 방지
 			UUID uuid = UUID.randomUUID();
@@ -85,29 +87,18 @@ public class BoardController { // 서버 기능들
 			try {
 				file.transferTo(saveFile);
 				board.setUniqueName(fileName);
-				// 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+				// 실제 파일 저장메서드(file writer 작업을 손쉽게 한방에 처리해준다.)
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-
-		///////////////////////////////////////////////
-		if (voteContent1 != null) {
-			System.out.println(voteContent1);
-			board.setVoteContent1(voteContent1);
-
-		}
-		if (voteContent2 != null) {
-			System.out.println(voteContent2);
-			board.setVoteContent2(voteContent2);
-		}
-
 		boardMapper.boardInsert(board);
 		return "redirect:/boardList.do";
 
 	}
+	
 
 	// 게시글 삭제
 	@GetMapping("/boardDelete.do/{boardID}")
@@ -125,7 +116,7 @@ public class BoardController { // 서버 기능들
 
 	}
 
-	// 버튼1 카운트
+	// 버튼2 카운트
 	@GetMapping("/buttonCount2.do/{boardID}")
 	public String buttonCount2(@PathVariable("boardID") int boardID, Board board) {
 

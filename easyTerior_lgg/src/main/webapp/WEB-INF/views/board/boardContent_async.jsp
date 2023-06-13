@@ -107,7 +107,7 @@
 				<c:if test="${not empty board.boardImage}">
 					<div class="image-container">
 						<img
-							src="${pageContext.request.contextPath}/resources/upload/${board.boardImage}"
+							src="${pageContext.request.contextPath}/resources/images/upload/${board.boardImage}"
 							alt="이미지">
 					</div>
 				</c:if>

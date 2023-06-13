@@ -30,7 +30,7 @@
 	var csrfTokenValue = "${_csrf.token}";
 
 	//처음에 댓글 리스트 불러오기
-	$(function() {
+	$(document).ready(function() {
 		loadComment();
 	});
 
@@ -65,12 +65,15 @@
 	function loadComment() {
 
 		$.ajax({
-			url : "/controller/board/allComment", //경로는 맞음
+			url : "${contextPath}/board/allComment", //경로는 맞음
 			type : "get",
 			dataType : "json",
+			//data : $("#commentForm").serialize(),
+			//contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 			success : makeComment,
+				
 			error : function() {
-				alert("error...");
+				alert("error..f.");
 			}
 
 		});

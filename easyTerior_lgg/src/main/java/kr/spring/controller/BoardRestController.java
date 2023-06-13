@@ -56,6 +56,7 @@ public class BoardRestController {
 	@GetMapping("/allComment")
 	public List<Comment> commentList() {
 		List<Comment> list = commentMapper.commentList();
+		System.out.println(list); //담겨져있음
 		return list;
 	}
 

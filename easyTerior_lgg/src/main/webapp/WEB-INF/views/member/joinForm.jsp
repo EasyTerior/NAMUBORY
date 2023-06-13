@@ -12,6 +12,8 @@
 <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
 rel="stylesheet" /><!-- icons -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="common.js"></script>
+
 <script type="text/javascript">
 	function registerCheck(){
 		let memID = $("#memID").val();
@@ -57,8 +59,17 @@ rel="stylesheet" /><!-- icons -->
 			$(".valid-tooltip").css("color","green");
 			$("#memPassword").val(memPassword1);
 		}
+	}
+	// 주소 채우기
+	function addressFill(){
+		let add1 = $("#address").val();
+		let add2 = $("#detailAddress").val();
+		let add3 = $("#extraAddress").val();
+		let fullAddress = add1+ " " + add2 + " " + add3;
+		$("#memAddress").val(fullAddress);
 		
 	}
+	
 	// invalid show
 	function validation(){
 		// Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -106,7 +117,7 @@ rel="stylesheet" /><!-- icons -->
 					<div class="row mb-3">
 					    <label for="memID" class="col-sm-2 col-form-label">아이디</label>
 					    <div class="col-sm-7">
-					        <input type="text" placeholder="공백 없이 한글, 영어, 숫자로 20자 미만의 아이디만 가능합니다." pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]+" maxlength=20 class="form-control" id="memID" name="memID"/>
+					        <input type="text" placeholder="공백 없이 한글, 영어, 숫자로 20자 미만의 아이디만 가능합니다." pattern="^[ㄱ-ㅎ가-힣a-zA-Z0-9]+" maxlength=20 class="form-control" id="memID" name="memID" />
 					    </div>
 					    <div class="col-sm-3">
 					        <button type="button" onclick="registerCheck()" data-bs-toggle="modal" class="btn btn-sm btn-primary" >중복확인</button>
@@ -115,21 +126,21 @@ rel="stylesheet" /><!-- icons -->
 					<div class="row mb-3 position-relative">
 					    <label for="memPassword1" class="col-sm-2 col-form-label">비밀번호</label>
 					    <div class="col-sm-10">
-					        <input type="password" name="memPassword1" id="memPassword1" class="form-control" onkeyup="passwordCheck()" />
+					        <input type="password" placeholder="비밀번호 현재 패턴 적용 안 함" name="memPassword1" id="memPassword1" class="form-control" onkeyup="passwordCheck()" />
 					    </div>
 					    <div class="valid-tooltip"></div>
 					</div>
 					<div class="row mb-3 position-relative">
 					    <label for="memPassword2" class="col-sm-2 col-form-label">비밀번호 확인</label>
 					    <div class="col-sm-10">
-					        <input type="password" name="memPassword2" id="memPassword2" class="form-control" onkeyup="passwordCheck()" />
+					        <input type="password" placeholder="비밀번호 현재 패턴 적용 안 함" name="memPassword2" id="memPassword2" class="form-control" onkeyup="passwordCheck()" />
 					        <div class="valid-tooltip"></div>
 					    </div>
 					</div>
 					<div class="row mb-3">
 					    <label for="memName" class="col-sm-2 col-form-label">이름</label>
 					    <div class="col-sm-10">
-					        <input type="text" class="form-control" id="memName" name="memName" required />
+					        <input type="text" placeholder="홍길동" pattern="^[ㄱ-ㅎ가-힣a-zA-Z\s]+" class="form-control" id="memName" name="memName" required />
 					    </div>
 					</div>
 					<div class="row mb-3">
@@ -141,32 +152,41 @@ rel="stylesheet" /><!-- icons -->
 					<div class="row mb-3">
 					    <label for="memPhone" class="col-sm-2 col-form-label">휴대폰 번호</label>
 					    <div class="col-sm-10">
-					        <input type="text" placeholder="000-0000-0000" pattern="^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$" class="form-control" id="memPhone" required />
+					        <input type="text" placeholder="000-0000-0000" pattern="^01[016789]-?([0-9]{3,4})-?([0-9]{4})$" class="form-control" id="memPhone" name="memPhone" required />
 					    </div>
 					</div>
 					<div class="row mb-3">
 					    <label for="memEmail" class="col-sm-2 col-form-label">이메일</label>
 					    <div class="col-sm-10">
-					        <input type="email" placeholder="email@email.com" pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$" class="form-control" id="memEmail" name="memEmail" required />
+					        <input type="email" placeholder="email@example.com" pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$" class="form-control" id="memEmail" name="memEmail" required />
 					    </div>
 					</div>
 					<div class="row mb-3">
 					    <label for="memAddress" class="col-sm-2 col-form-label">주소</label>
-					    <input type="hidden" class="" id="memAddress" name="memAddress" />
-					    <div class="col-md-4 input-grou position-relative">
-							<button type="button" class="btn btn-sm btn-info align-top" onclick="addressFullFill()">우편번호 찾기</button>
-					        	<input type="text" id="postcode" class="form-control"  placeholder="우편번호">
-						</div>
+					    <input type="hidden" name="memAddress" id="memAddress" />
 					    <div class="col-sm-10">
-
-					        <input type="text" id="address" class="form-control" style="width: 300px;" placeholder="주소">
-							<input type="text" id="detailAddress" class="form-control" placeholder="상세주소">
-							<input type="text" id="extraAddress" class="form-control" placeholder="참고항목">
+					    	<div class="row mb-2">
+					    		<div class="col-12">
+					    			<input type="text" onchange="addressFill()" id="address" class="form-control" style="min-width: 300px;" placeholder="주소" required />
+					    		</div>
+					    	</div>
+					    	<div class="row mb-2">
+					    		<div class="col-auto">
+					    			<input type="text" onchange="addressFill()" id="detailAddress" class="form-control" placeholder="상세주소" />
+					    		</div>
+					    		<div class="col-auto">
+					    			<input type="text" style="width: 150px;" onchange="addressFill()" id="extraAddress" class="form-control" placeholder="참고항목" />
+					    		</div>
+					    		<div class="col-auto">
+					    			<button type="button" class="btn btn-info align-top" onclick="addressFullFill()">주소찾기</button>
+					    		</div>
+					    	</div>
 					    </div>
 					</div>
 					<div class="row mb-3">
-					    <div class="col-sm-10 offset-sm-2">
+					    <div class="col-sm-10 offset-sm-2 text-center">
 					        <button type="submit" class="btn btn-primary">가입하기</button>
+					        <button type="reset" class="btn btn-warning align-top" onclick="addressFullFill()">취소하기</button>
 					    </div>
 					</div>
 				</form>
@@ -243,8 +263,11 @@ rel="stylesheet" /><!-- icons -->
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
+                // document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("address").value = addr;
+             	// memAddress 에 추가
+                document.getElementById("memAddress").value = addr;
+                
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("detailAddress").focus();
             }

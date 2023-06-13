@@ -50,7 +50,7 @@ body, main, section {
 .btn-custom {
 	padding: 0.25rem 0.75rem;
 	background-color: lightblue;
-	border:none;
+	border: none;
 }
 </style>
 <script type="text/javascript">
@@ -172,7 +172,7 @@ function readURL(input) {
 		listHtml += "<div class='row'>";
 		  
 		if (${not empty sessionScope.memResult}) {
-		  // Write button HTML
+		  // Write button HTML 
 		  listHtml += "<div class='col-md-12' style='margin-bottom: 10px;'>"; // Add margin-bottom to create space below the button
 		  listHtml += "<button onclick='goForm()' class='btn btn-sm btn-primary float-end'>글쓰기</button>";
 		  listHtml += "</div>";
@@ -197,7 +197,7 @@ function readURL(input) {
 		  listHtml += "<div class='image-container'>";
 		  //이미지 없을 때 예외처리
 		  if (model.boardImage !== null && model.boardImage !== '') {
-		    listHtml += '<img src="' + contextPath + '/resources/upload/' + model.boardImage + '" alt="image">';
+		    listHtml += '<img src="' + contextPath + '/resources/images/upload/' + model.boardImage + '" alt="image">';
 		  }
 		  listHtml += "</div>";
 		  listHtml += "<div class='card-body'>";
@@ -236,11 +236,6 @@ function readURL(input) {
         $(".vote-item").val('');
     }
 
-	
-	
-	
-	
-	
 	function goForm() {
 		$("#view").css("display", "none");
 		$("#wform").css("display", "block");
@@ -275,8 +270,7 @@ function readURL(input) {
 			<div class="container">
 				<form action="board/new2?${_csrf.parameterName}=${_csrf.token}"
 					method="post" enctype="multipart/form-data">
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" /> <input type="hidden" name="memID"
+					<input type="hidden" name="memID"
 						value="${sessionScope.memResult.memID}">
 					<div class="col-12 mx-auto mt-3 mb-3 p-2"
 						style="background-color: lightgray;">
@@ -297,7 +291,7 @@ function readURL(input) {
 						<label for="image"
 							class="col-form-label col-md-1 text-center fw-bold">사진 추가</label>
 						<div class="col-md-11">
-							<input type="file" name="file">
+							<input type="file" class="form-control" name="file" id="file">
 						</div>
 					</div>
 					<div class="row mb-4">
@@ -336,8 +330,9 @@ function readURL(input) {
 						</div>
 					</div>
 					<button type="submit" class="btn btn-sm btn-success">등록하기</button>
+				</form>
 			</div>
-			</form>
+
 
 
 		</div>
