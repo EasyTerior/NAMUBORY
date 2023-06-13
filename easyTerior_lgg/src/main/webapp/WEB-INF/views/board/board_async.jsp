@@ -52,6 +52,16 @@ body, main, section {
 	background-color: lightblue;
 	border: none;
 }
+@font-face {
+font-family: 'SUITE-Regular';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+font-weight: 400;
+font-style: normal;
+}
+body, main, section {
+position: relative;
+font-family:'SUITE-Regular';
+}
 </style>
 <script type="text/javascript">
 
@@ -197,7 +207,7 @@ function readURL(input) {
 		  listHtml += "<div class='image-container'>";
 		  //이미지 없을 때 예외처리
 		  if (model.boardImage !== null && model.boardImage !== '') {
-		    listHtml += '<img src="' + contextPath + '/resources/images/upload/' + model.boardImage + '" alt="image">';
+		    listHtml += '<img src="' + contextPath + '/resources/upload/' + model.boardImage + '" alt="image">';
 		  }
 		  listHtml += "</div>";
 		  listHtml += "<div class='card-body'>";

@@ -66,6 +66,16 @@
 .custom-btn:nth-child(2) {
   background-color: lightgray; /* Set background color for the second button */
 }
+@font-face {
+font-family: 'SUITE-Regular';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+font-weight: 400;
+font-style: normal;
+}
+body, main, section {
+position: relative;
+font-family:'SUITE-Regular';
+}
 </style>
 </head>
 <body>
@@ -107,7 +117,7 @@
 				<c:if test="${not empty board.boardImage}">
 					<div class="image-container">
 						<img
-							src="${pageContext.request.contextPath}/resources/images/upload/${board.boardImage}"
+							src="${pageContext.request.contextPath}/resources/upload/${board.boardImage}"
 							alt="이미지">
 					</div>
 				</c:if>

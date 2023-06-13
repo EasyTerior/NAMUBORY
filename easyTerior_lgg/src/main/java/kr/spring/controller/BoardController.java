@@ -70,7 +70,7 @@ public class BoardController { // 서버 기능들
 			// 서버에 저장할 파일이름 file extension으로 .asp이런식의 확장자 명을 구함
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			// 이고관PC 로컬 주소 - 수정해야합니다.
-			String uploadFolder = "D:\\total\\easyTerior_total\\src\\main\\webapp\\resources\\images\\upload";
+			String uploadFolder = "D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources\\upload";
 
 			// 파일 이름 중복 방지
 			UUID uuid = UUID.randomUUID();
