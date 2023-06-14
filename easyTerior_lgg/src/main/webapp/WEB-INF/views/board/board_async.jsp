@@ -52,15 +52,19 @@ body, main, section {
 	background-color: lightblue;
 	border: none;
 }
+
 @font-face {
-font-family: 'SUITE-Regular';
-src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-font-weight: 400;
-font-style: normal;
+	font-family: 'SUITE-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
 }
-body, main, section { //df
-position: relative;
-font-family:'SUITE-Regular';
+
+body, main, section {
+	position: relative;
+	font-family: 'SUITE-Regular';
 }
 </style>
 <script type="text/javascript">
@@ -93,7 +97,7 @@ $(document).ready(function() {
     $("#addItemBtn").click(function() {
         itemCount++; // 항목 수 증가
         var inputField = '<div class="offset-md-1 col-md-11 mb-2" style="display: block;">' +
-            '<input type="text" class="form-control vote-item" name="voteContent" placeholder="' + (itemCount+1) + '. 항목을 입력하세요">' +
+            '<input type="text" class="form-control vote-item" name="voteContent'+ (itemCount+1) +'" placeholder="' + (itemCount+1) + '. 항목을 입력하세요">' +
             '</div>';
         var newInputField = $(inputField).clone(); // 새로운 input 요소 생성
         newInputField.find("input").attr("id", "vote-item-" + (itemCount+1)); // 증가된 id 적용 -> 이렇게 하면 input 태그 각각 id값이 달라짐
@@ -249,6 +253,7 @@ function readURL(input) {
 	function goForm() {
 		$("#view").css("display", "none");
 		$("#wform").css("display", "block");
+		getColorList();
 	}
 
 	function goList() {
@@ -256,7 +261,51 @@ function readURL(input) {
 		$("#wform").css("display", "none");
 	}
 	
-	
+	// 이미지 목록 불러오기(여기 이미지 경로 다 바꿔야해요)
+	function getColorList(){
+		$.ajax({
+			url: "style/getColorList",
+			type: "POST",
+			beforeSend : function(xhr){ // xhr 에 담아서 보냄
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			data: {"memID":"${memResult.memID}"},
+			dataType: "json",
+			success: function(response) {
+				console.log("getColorList success");
+				// console.log(response);
+				// 서버에서 반환된 사용자 정보를 response 변수로 받아 처리
+				// 목록을 가져와서 리스트로 구성
+				var listItems = "<div class='row'>";
+				var count = 0; // Initialize a count variable
+
+				$.each(response, function(index, item) {
+				  if (count % 2 === 0 && count !== 0) {
+				    listItems += "</div><div class='row'>"; // Close the previous row and start a new row
+				  }
+
+				  listItems += "<div class='col-md-6'>"; // Use col-md-6 for two pictures per row
+				  listItems += "<li class='form-check d-block mb-3'>";
+				  listItems += "<input type='checkbox' class='form-check-input' name='selectedColor' id='img"+item.imgID+"' value='" + item.imgID + "' data-filename ='" + item.fileName + "'/>";
+				  listItems += "<label class='form-check-label' for='img"+item.imgID+"'><img src='${pageContext.request.contextPath}/resources/upload/"+item.fileName+ "' value ='"+item.imgID+"' class='imgSelect' name='selectedColor' alt="+item.fileName+" style='width:420px;' /></label>";
+				  listItems += "</li>";
+				  listItems += "</div>"; // Close the column div
+
+				  count++; // Increment the count variable
+				});
+
+				listItems += "</div>"; // Close the last row div
+
+				$("#colorImg").html("<ul>" + listItems + "</ul>");
+
+
+			},
+			error: function(xhr, status, error) {
+				console.log("getColorList Error - xhr : "+xhr+" | status : "+status+" | error : "+error);
+				console.error(error);
+			}
+		});
+	}
 	
 </script>
 
@@ -304,6 +353,7 @@ function readURL(input) {
 							<input type="file" class="form-control" name="file" id="file">
 						</div>
 					</div>
+					<div id="colorImg" class="row mb-4"></div>
 					<div class="row mb-4">
 						<label for="content"
 							class="col-form-label col-md-1 text-Scenter fw-bold">내용</label>

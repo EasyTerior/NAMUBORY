@@ -11,8 +11,10 @@
 	<!-- 게시글 추가 -->
 	<insert id="boardInsert" parameterType="kr.spring.entity.Board">
 		INSERT INTO Board(title,
-		content, memID,boardImage,voteContent1, voteContent2)
-		VALUES(#{title}, #{content}, #{memID},#{uniqueName},#{voteContent1},#{voteContent2});
+		content, memID,boardImage,boardImage2, boardImage3, boardImage4,
+		voteContent1, voteContent2, voteContent3, voteContent4)
+		VALUES(#{title}, #{content},
+		#{memID},#{uniqueName},#{boardImage2},#{boardImage3},#{boardImage4},#{voteContent1},#{voteContent2},#{voteContent3},#{voteContent4});
 	</insert>
 
 	<!-- 게시글 상세보기 -->
@@ -21,11 +23,11 @@
 		SELECT * FROM Board
 		WHERE boardID = #{boardID};
 	</select>
-	
+
 	<!-- 게시글 삭제 -->
 	<delete id="boardDelete" parameterType="int">
 		delete from Board
-	    where boardID = #{boardID};
+		where boardID = #{boardID};
 	</delete>
 
 </mapper>

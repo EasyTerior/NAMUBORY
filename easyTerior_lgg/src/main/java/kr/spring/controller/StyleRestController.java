@@ -2,6 +2,7 @@ package kr.spring.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import kr.spring.entity.Color;
+import kr.spring.entity.Member;
 import kr.spring.entity.Style;
+import kr.spring.mapper.ColorMapper;
 import kr.spring.mapper.MemberMapper;
 import kr.spring.mapper.StyleMapper;
 
@@ -28,6 +34,9 @@ public class StyleRestController {
 	
 	@Autowired
     private StyleMapper styleMapper;
+	
+	@Autowired
+	private ColorMapper colorMapper;
 
 	@PostMapping("/save")
     public ResponseEntity<Map<String, String>> saveStyle(@RequestBody Style style) {
@@ -44,6 +53,14 @@ public class StyleRestController {
 		String flaskResponse =  (String) session.getAttribute("flaskResponse");
 		
 		return null;
+	}
+	
+	@PostMapping("/getColorList")
+	public List<Color> getColorList(@RequestParam("memID") String memID){
+		Member memberInfo = memberMapper.getMember(memID);
+		List<Color> color = colorMapper.getColor(memID);
+		//System.out.println("\n\ncolor : "+color);
+		return color;
 	}
 
 	

@@ -23,7 +23,7 @@
     		</li>
     	</ul>
         <div>
-        EasyTerior
+    
         </div>
     </div>
 </div>

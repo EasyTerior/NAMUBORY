@@ -33,5 +33,10 @@ public interface BoardMapper {
 	@Update("update Board set count2 = count2 + 1 where boardID = #{boardID}") 
 	public void buttonCount2(int boardID);
 	
+	@Update("update Board set count3 = count3 + 1 where boardID = #{boardID}") 
+	public void buttonCount3(int boardID);
+	
+	@Update("update Board set count4 = count4 + 1 where boardID = #{boardID}") 
+	public void buttonCount4(int boardID);
 	
 }

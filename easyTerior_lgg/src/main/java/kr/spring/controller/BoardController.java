@@ -26,12 +26,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.spring.entity.Board;
 import kr.spring.mapper.BoardMapper;
+import kr.spring.mapper.ColorMapper;
 
 @Controller
 public class BoardController { // 서버 기능들
 
 	@Autowired
 	private BoardMapper boardMapper;
+
+	@Autowired
+	private ColorMapper colorMapper;
 
 	// 게시판 이동
 	@RequestMapping("/boardList.do")
@@ -58,7 +62,9 @@ public class BoardController { // 서버 기능들
 	// 게시판 업로드
 	@PostMapping("board/new2")
 	public String boardInsert2(@RequestParam(value = "file", required = false) MultipartFile file, Board board,
-			HttpServletRequest request) { // RestController
+			HttpServletRequest request,
+			@RequestParam(value = "selectedColor", required = false) List<Integer> selectedColors,
+			@RequestParam(value = "selectedColor", required = false) List<String> fileNames) { // RestController
 
 		if (file != null && !file.isEmpty()) {
 			String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
@@ -70,7 +76,7 @@ public class BoardController { // 서버 기능들
 			// 서버에 저장할 파일이름 file extension으로 .asp이런식의 확장자 명을 구함
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			// 이고관PC 로컬 주소 - 수정해야합니다.
-			String uploadFolder = "D:\\NAMUBORY\\easyTerior_lgg\\src\\main\\webapp\\resources\\upload";
+			String uploadFolder = "C:\\eGovFrame-4.0.0\\workspace.edu\\lgg녹화용\\src\\main\\webapp\\resources\\upload";
 
 			// 파일 이름 중복 방지
 			UUID uuid = UUID.randomUUID();
@@ -94,11 +100,35 @@ public class BoardController { // 서버 기능들
 				e.printStackTrace();
 			}
 		}
+		if (selectedColors != null && fileNames != null) {
+			for (int i = 0; i < selectedColors.size(); i++) {
+				int selectedColor = selectedColors.get(i);
+				String fileName = colorMapper.getColorfilename(selectedColors.get(i));
+				System.out.println(selectedColor);
+				System.out.println(fileName);
+				// Based on the index (i), assign the file names to the respective boardImage
+				// properties
+				if (i == 0) {
+					board.setBoardImage2(fileName);
+				} else if (i == 1) {
+					board.setBoardImage3(fileName);
+				} else if (i == 2) {
+					board.setBoardImage4(fileName);
+				}
+				String cfilename = colorMapper.getColorfilename(selectedColors.get(0));
+				System.out.println(cfilename);
+				// Process the selectedColor and fileName as needed
+				// ...
+			}
+		}
+
+		// Rest of the code...
+		System.out.println(board.toString());
+
 		boardMapper.boardInsert(board);
 		return "redirect:/boardList.do";
 
 	}
-	
 
 	// 게시글 삭제
 	@GetMapping("/boardDelete.do/{boardID}")
@@ -121,6 +151,22 @@ public class BoardController { // 서버 기능들
 	public String buttonCount2(@PathVariable("boardID") int boardID, Board board) {
 
 		boardMapper.buttonCount2(boardID);
+		return "redirect:/boardContent/{boardID}";
+	}
+
+	// 버튼3 카운트
+	@GetMapping("/buttonCount3.do/{boardID}")
+	public String buttonCount3(@PathVariable("boardID") int boardID, Board board) {
+
+		boardMapper.buttonCount3(boardID);
+		return "redirect:/boardContent/{boardID}";
+	}
+
+	// 버튼4 카운트
+	@GetMapping("/buttonCount4.do/{boardID}")
+	public String buttonCount4(@PathVariable("boardID") int boardID, Board board) {
+
+		boardMapper.buttonCount4(boardID);
 		return "redirect:/boardContent/{boardID}";
 	}
 

@@ -17,14 +17,21 @@ public class Board {
 	private String content;
 	private String uniqueName;  // 추가(boardImage에 값을 할당하기 위해 만듦)
 	private String boardImage;
+	private String boardImage2;
+	private String boardImage3;
+	private String boardImage4;
 	private Date createdAt;
 	private int views;
 	private String memID;
 	private int voteCount;    // 투표 기능으로 인해 아래 세개 추가
 	private String voteContent1;
 	private String voteContent2;
+	private String voteContent3;
+	private String voteContent4;
 	private int count1;
 	private int count2;
+	private int count3;
+	private int count4;
 	
 }
 
