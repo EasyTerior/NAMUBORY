@@ -58,7 +58,7 @@ src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-R
 font-weight: 400;
 font-style: normal;
 }
-body, main, section {
+body, main, section { //df
 position: relative;
 font-family:'SUITE-Regular';
 }
